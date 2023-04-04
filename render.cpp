@@ -22,7 +22,7 @@ vector<string> convertMatIntoArray(const cv::Mat& material) {
 
 
 void write(const vector<string>& input) {
-    for(const auto& value : input){
+    for(const string& value : input){
         cout << value;
     }
 }

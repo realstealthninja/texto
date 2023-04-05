@@ -1,3 +1,4 @@
+#include "render.hpp"
 #include <iostream>
 #include <vector>
 #include <opencv2/opencv.hpp>
@@ -6,10 +7,6 @@
 using namespace cv;
 using namespace std;
 
-enum EncodeType {
-    GSCALE = 0,
-    RGB = 1
-};
 
 vector<string> convertMatIntoArray(const Mat &material, EncodeType encodeType = GSCALE) {
     vector<string> lines;
@@ -31,18 +28,17 @@ void write(const vector<string>& input) {
     }
 }
 
-int main(){
-    Mat image = imread("../image.png");
+void render(const char * path){
+    Mat image = imread(path);
 
     if (image.empty()){
         cout << "couldn't read image";
-        return -1;
+        exit(-1);
     }
 
     cvtColor(image, image, COLOR_BGR2GRAY);
 
     vector<string> imageChar = convertMatIntoArray(image);
     write(imageChar);
-    return 0;
 }
 

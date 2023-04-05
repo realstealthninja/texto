@@ -6,8 +6,12 @@
 using namespace cv;
 using namespace std;
 
+enum EncodeType {
+    GSCALE = 0,
+    RGB = 1
+};
 
-vector<string> convertMatIntoArray(const cv::Mat& material) {
+vector<string> convertMatIntoArray(const Mat &material, EncodeType encodeType = GSCALE) {
     vector<string> lines;
     for (int i{0}; i < material.rows; i++) {
         string line;
@@ -23,7 +27,7 @@ vector<string> convertMatIntoArray(const cv::Mat& material) {
 
 void write(const vector<string>& input) {
     for(const string& value : input){
-        cout << value;
+        cout << value << "\n";
     }
 }
 

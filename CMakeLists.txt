@@ -3,5 +3,5 @@ project(texto)
 
 set(CMAKE_CXX_STANDARD 20)
 find_package(OpenCV REQUIRED)
-add_executable(texto render.cpp scales.hpp)
+add_executable(texto render.cpp scales.hpp main.cpp render.hpp)
 target_link_libraries(texto ${OpenCV_LIBS})

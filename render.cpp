@@ -23,6 +23,7 @@ vector<string> convertMatIntoArray(const Mat &material, EncodeType encodeType = 
 
 
 void write(const vector<string>& input) {
+    printf("\033[?7l");
     for(const string& value : input){
         cout << value << "\n";
     }
@@ -37,7 +38,7 @@ void render(const char * path){
     }
 
     cvtColor(image, image, COLOR_BGR2GRAY);
-
+    resize(image, image, Size(), 0.2, 0.09, INTER_LINEAR);
     vector<string> imageChar = convertMatIntoArray(image);
     write(imageChar);
 }

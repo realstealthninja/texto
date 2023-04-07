@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <opencv2/opencv.hpp>
+#include <sys/ioctl.h>
+#include <cstdio>
+#include <unistd.h>
 #include "scales.hpp"
 
 using namespace cv;
@@ -36,9 +39,11 @@ void render(const char * path){
         cout << "couldn't read image";
         exit(-1);
     }
+    struct winsize w{};
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
     cvtColor(image, image, COLOR_BGR2GRAY);
-    resize(image, image, Size(), 0.2, 0.09, INTER_LINEAR);
+    resize(image, image, Size((int) w.ws_col, (int) w.ws_row), INTER_LINEAR);
     vector<string> imageChar = convertMatIntoArray(image);
     write(imageChar);
 }

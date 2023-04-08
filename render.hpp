@@ -1,3 +1,4 @@
+#pragma once
 #ifndef TEXTO_RENDER_HPP
 
 #define TEXTO_RENDER_HPP
@@ -14,6 +15,9 @@ enum EncodeType {
     RGB = 1
 };
 
-void render(const char * path);
+void renderImage(const char* path);
+
+void renderVideo(const char* path);
+
 
 #endif //TEXTO_RENDER_HPP

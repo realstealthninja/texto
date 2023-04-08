@@ -3,13 +3,16 @@
 #include <vector>
 #include <opencv2/opencv.hpp>
 #include <sys/ioctl.h>
-#include <cstdio>
+#include <chrono>
+#include <thread>
 #include <unistd.h>
 #include "scales.hpp"
 
 using namespace cv;
 using namespace std;
 
+
+struct winsize w{};
 
 vector<string> convertMatIntoArray(const Mat &material, EncodeType encodeType = GSCALE) {
     vector<string> lines;
@@ -26,25 +29,50 @@ vector<string> convertMatIntoArray(const Mat &material, EncodeType encodeType = 
 
 
 void write(const vector<string>& input) {
-    printf("\033[?7l");
+    system("clear");
     for(const string& value : input){
         cout << value << "\n";
     }
 }
 
-void render(const char * path){
+void renderImage(const char* path){
     Mat image = imread(path);
 
     if (image.empty()){
         cout << "couldn't read image";
         exit(-1);
     }
-    struct winsize w{};
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-
-    cvtColor(image, image, COLOR_BGR2GRAY);
     resize(image, image, Size((int) w.ws_col, (int) w.ws_row), INTER_LINEAR);
+    cvtColor(image, image, COLOR_BGR2GRAY);
     vector<string> imageChar = convertMatIntoArray(image);
     write(imageChar);
+}
+
+void renderVideo(const char* path) {
+    Mat frame;
+    VideoCapture video(path);
+
+    double fps = video.get(CAP_PROP_FPS);
+    double displayRate = 1000/fps;
+
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+    while(true) {
+        video >> frame;
+
+        if (frame.empty()) break;
+
+        resize(frame, frame, Size((int) w.ws_col, (int)w.ws_row), INTER_LINEAR);
+        cvtColor(frame, frame, COLOR_BGR2GRAY);
+
+        vector<string> imageChar = convertMatIntoArray(frame);
+
+        write(imageChar);
+        this_thread::sleep_for(chrono::milliseconds((int)displayRate));
+    }
+
+    video.release();
+
 }
 

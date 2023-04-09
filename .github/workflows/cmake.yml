@@ -19,7 +19,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
+    
+    - name: Setup OpenCV
+      # You may pin to the exact commit or the version.
+      # uses: Dovyski/setup-opencv-action@51a569c1ba33b603f6d271fc6fa3a01023b6240f
+      uses: Dovyski/setup-opencv-action@v1.1
+      with:
+        # OpenCV version to be installed.
+        opencv-version: 4.0.0
+        # If opencv-contrib (extra modules) should be included in the instalation.
+        opencv-extra-modules: true
+        # If dependencies should be installed as well.
+        install-deps: true
+        CMAKE_BUILD_TYPE: RELEASE
+  
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type

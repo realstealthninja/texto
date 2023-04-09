@@ -7,7 +7,7 @@
 
 <p align="center">Your one-stop shop for all things related to ascii.</p>
 
-<img src="./examples/texto.svg" align="center" alt="texto-logo">
+<img src="./examples/texto.svg" height="100px" width="100px" align="center" alt="texto-logo">
 
 #### Texto is supposed to be an [ASCII](https://en.wikipedia.org/wiki/ASCII) based renderer.
 

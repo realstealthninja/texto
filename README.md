@@ -3,11 +3,18 @@
 ![](https://img.shields.io/github/repo-size/realstealthninja/texto?style=flat-square)
 
 <!--suppress ALL -->
+
 <h1 align="center">Texto</h1>
 
-<p align="center">Your one-stop shop for all things related to ascii.</p>
+<p align="center">
+Your one-stop shop for all things related to ascii.
+</p>
 
-<img src="./examples/texto.svg" height="100px" width="100px" align="center" alt="texto-logo">
+<p align="center">
+<img src="./examples/texto.svg" height="300" width="300" alt="texto-logo">
+</p>
+
+
 
 #### Texto is supposed to be an [ASCII](https://en.wikipedia.org/wiki/ASCII) based renderer.
 
@@ -38,7 +45,7 @@ Usage
 ```bash
 ./texto <PATH-TO-FILE> <COLOURSPACE>
 ```
- 
+
 Want to contribute?
 ===================
 

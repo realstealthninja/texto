@@ -15,9 +15,9 @@ Table of contents
 =================
 
 <!--ts-->
-    * [Installation](#Installation)
-    * [Usage](#Usage)
-    * [Contributing](#Want to contribute?)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Contributing](#Want to contribute?)
 <!--te-->
 
 Installation
@@ -26,8 +26,8 @@ Installation
 Right now Texto does not offer a prebuilt package. but it does not take a lot to compile
 
 ```bash
-   cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -S ./ -B ./cmake-build-release
-   cmake --build ./cmake-build-release --target texto -j 1
+cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -S ./ -B ./cmake-build-release
+cmake --build ./cmake-build-release --target texto -j 1
 ```
 
 or run build.sh
@@ -36,7 +36,7 @@ Usage
 =====
 
 ```bash
-    ./texto <PATH-TO-FILE> <COLOURSPACE>
+./texto <PATH-TO-FILE> <COLOURSPACE>
 ```
  
 Want to contribute?

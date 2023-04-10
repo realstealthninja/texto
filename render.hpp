@@ -15,9 +15,9 @@ enum EncodeType {
     RGB = 1
 };
 
-void renderImage(const char* path);
+void renderImage(const char* path, EncodeType encodeType);
 
-void renderVideo(const char* path);
+void renderVideo(const char* path, EncodeType encodeType);
 
 
 #endif //TEXTO_RENDER_HPP

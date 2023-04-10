@@ -26,9 +26,4 @@ namespace textoEngine {
         Rotation = rotation;
         Vertices = std::move(vertices);
     }
-
-
-    Renderer::Renderer() {
-
-    }
 }

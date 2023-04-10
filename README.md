@@ -24,7 +24,7 @@ Table of contents
 <!--ts-->
 * [Installation](#Installation)
 * [Usage](#Usage)
-* [Contributing](#Want to contribute?)
+* [Contributing](#Want-to-contribute?)
 <!--te-->
 
 Installation

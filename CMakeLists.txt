@@ -8,5 +8,10 @@ add_executable(
         main.cpp
         render.hpp
         render.cpp
-        scales.hpp 3d.cpp 3d.hpp)
+        scales.hpp
+        3d.cpp
+        3d.hpp
+        matrix.cpp
+        matrix.hpp
+)
 target_link_libraries(texto ${OpenCV_LIBS})

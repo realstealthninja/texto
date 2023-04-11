@@ -11,7 +11,7 @@ add_executable(
         scales.hpp
         3d.cpp
         3d.hpp
-        matrix.cpp
-        matrix.hpp
-)
+        math/matrix.cpp
+        math/matrix.hpp
+        math/vector2.cpp math/vector2.hpp math/vector3.cpp math/vector3.hpp)
 target_link_libraries(texto ${OpenCV_LIBS})

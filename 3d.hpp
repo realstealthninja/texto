@@ -2,6 +2,7 @@
 #ifndef TEXTO_3D_HPP
 #define TEXTO_3D_HPP
 
+
 struct vector3 {
     float x;
     float y;

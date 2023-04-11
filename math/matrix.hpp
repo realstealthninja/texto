@@ -36,8 +36,8 @@ public:
     T& operator()(const unsigned& row, const unsigned& col);
     const T& operator()(const unsigned& row, const unsigned& col) const;
 
-    unsigned get_rows() const;
-    unsigned get_cols() const;
+    [[nodiscard]] unsigned get_rows() const;
+    [[nodiscard]] unsigned get_cols() const;
 };
 
 

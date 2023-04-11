@@ -1,4 +1,4 @@
-#include <stdexcept>
+#include "cassert"
 #include "matrix.hpp"
 
 template<typename T>
@@ -45,8 +45,8 @@ Matrix<T>::~Matrix() = default;
 
 template<typename T>
 Matrix<T> Matrix<T>::operator+(const Matrix<T> &_matrix) {
-    if (_matrix.cols != cols || _matrix.rows != rows)
-        throw std::invalid_argument("Matrices must be of the same order");
+    assert(_matrix.cols == cols);
+    assert(_matrix.rows == rows);
 
     Matrix result(rows, cols, 0.0);
 
@@ -59,8 +59,8 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T> &_matrix) {
 
 template<typename T>
 Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &_matrix) {
-    if (_matrix.cols != cols || _matrix.rows != rows)
-        throw std::invalid_argument("Matrices must be of the same order");
+    assert(_matrix.cols == cols);
+    assert(_matrix.rows == rows);
 
     for (unsigned i{0}; i < _matrix.get_rows(); i++)
         for (unsigned j{0}; j < _matrix.get_cols(); j++)
@@ -71,8 +71,8 @@ Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &_matrix) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator-(const Matrix<T> &_matrix) {
-    if (_matrix.cols != cols || _matrix.rows != rows)
-        throw std::invalid_argument("Matrices must be of the same order");
+    assert(_matrix.cols == cols);
+    assert(_matrix.rows == rows);
 
     Matrix result(rows, cols, 0.0);
 
@@ -85,8 +85,8 @@ Matrix<T> Matrix<T>::operator-(const Matrix<T> &_matrix) {
 
 template<typename T>
 Matrix<T> &Matrix<T>::operator-=(const Matrix<T> &_matrix) {
-    if (_matrix.cols != cols || _matrix.rows != rows)
-        throw std::invalid_argument("Matrices must be of the same order");
+    assert(_matrix.cols == cols);
+    assert(_matrix.rows == rows);
 
     for (unsigned i{0}; i < _matrix.get_rows(); i++)
         for (unsigned j{0}; j < _matrix.get_cols(); j++)

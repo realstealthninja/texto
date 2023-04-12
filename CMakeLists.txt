@@ -9,6 +9,8 @@ add_executable(
         render.hpp
         render.cpp
         scales.hpp
+        3d.cpp
+        3d.hpp
         math/matrix.cpp
         math/matrix.hpp
         math/vector2.cpp math/vector2.hpp math/vector3.cpp math/vector3.hpp)

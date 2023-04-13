@@ -17,10 +17,24 @@ struct winsize w{};
 vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE) {
     vector<string> lines;
     Mat colors[3];
-    if (encodeType != GSCALE) {
-        split(material, colors);
-        cvtColor(material, material, COLOR_BGR2GRAY);
+    std::string SCALE;
+
+    switch (encodeType){
+        case GSCALE:
+            SCALE = GRAYSCALE;
+            break;
+        case RGB:
+            split(material, colors);
+            cvtColor(material, material, COLOR_BGR2GRAY);
+            SCALE = GRAYSCALE;
+            break;
+        case SHORT_GSCALE:
+            SCALE = SHORT_GRAYSCALE;
+            break;
+        case REVERSE_GSCALE:
+            SCALE = REVERSED_GRAYSCALE;
     }
+
     for (int i{0}; i < material.rows; i++) {
         string line;
         for (int j{0}; j < material.cols; j++) {
@@ -35,7 +49,7 @@ vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE
                         (int)colors[0].at<uchar>(i,j),
                         GRAYSCALE[pixel % GRAYSCALE.length()]);
             } else {
-                line += GRAYSCALE[pixel % GRAYSCALE.length()];
+                line += SCALE[pixel % SCALE.length()];
             }
         }
         lines.push_back(line);
@@ -92,6 +106,5 @@ void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
     }
 
     video.release();
-
 }
 

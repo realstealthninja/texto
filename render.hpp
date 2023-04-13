@@ -12,7 +12,9 @@ using namespace cv;
 
 enum EncodeType {
     GSCALE = 0,
-    RGB = 1
+    RGB = 1,
+    SHORT_GSCALE = 2,
+    REVERSE_GSCALE = 3
 };
 
 void renderImage(const char* path, EncodeType encodeType);

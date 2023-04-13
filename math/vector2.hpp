@@ -19,5 +19,4 @@ class Vector2 {
 
 };
 
-#include "vector2.cpp"
 #endif //TEXTO_VECTOR2_HPP

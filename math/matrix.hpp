@@ -11,7 +11,7 @@ private:
     unsigned rows;
     unsigned cols;
 public:
-    Matrix(unsigned rows, unsigned cols, const T& t);
+    Matrix(unsigned _rows, unsigned _cols, const T& t);
     Matrix(const Matrix<T>& _matrix);
     virtual ~Matrix();
 
@@ -39,10 +39,5 @@ public:
     [[nodiscard]] unsigned get_rows() const;
     [[nodiscard]] unsigned get_cols() const;
 };
-
-
-
-
-#include "matrix.cpp"
 
 #endif //TEXTO_MATRIX_HPP

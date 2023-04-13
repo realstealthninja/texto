@@ -32,10 +32,3 @@ float &Vector2::operator[](int i) {
     }
 }
 
-
-
-
-
-
-
-

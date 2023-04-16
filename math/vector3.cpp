@@ -47,3 +47,10 @@ Vector3 Vector3::TransformCoordinate(Vector3 &coordinate, Matrix<float> &transfo
 
     return Vector3(vector.x * vector.w, vector.y * vector.w, vector.z * vector.w);
 }
+Vector3 Vector3::cross(Vector3 &v) {
+    return Vector3(
+            (y * v.z) - (z *v.y),
+            (z * v.x) - (x * v.z),
+            (x * v.y) - (y * v.x)
+    );
+}

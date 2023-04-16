@@ -19,7 +19,7 @@ public:
 
     // other operations
     Vector3 TransformCoordinate(Vector3 &coordinate, Matrix<float> &transform);
+    Vector3 cross(Vector3 &v);
 };
-
 
 #endif//TEXTO_VECTOR3_HPP

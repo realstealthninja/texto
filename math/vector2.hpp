@@ -15,8 +15,6 @@ class Vector2 {
         Vector2& operator-= (const Vector2 &v);
 
         float &operator[](int i);
-
-
 };
 
 #endif //TEXTO_VECTOR2_HPP

@@ -1,18 +1,15 @@
-//
-// Created by stealthninja on 4/13/23.
-//
-
 #ifndef TEXTO_MAIN_HPP
 #define TEXTO_MAIN_HPP
 
-std::string MENU = "############################\n"
+#include <string>
+std::string menu = "############################\n"
                    "#                          #\n"
                    "#      0.Image             #\n"
                    "#      1.Video             #\n"
                    "#                          #\n"
                    "############################\n"
                    "Input?: ";
-std::string ENCODING = "############################\n"
+std::string encoding = "############################\n"
                        "#                          #\n"
                        "#      0.GRAY SCALE        #\n"
                        "#      1.RGB               #\n"

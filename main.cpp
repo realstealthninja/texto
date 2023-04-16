@@ -1,6 +1,6 @@
-#include <iostream>
-#include "render.hpp"
 #include "main.hpp"
+#include "render.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -8,14 +8,14 @@ int main() {
     int selection;
     int type;
     std::string path;
-    cout << MENU;
+    cout << menu;
     cin >> selection;
     cout << "Path?: ";
     cin >> path;
-    cout << ENCODING;
+    cout << encoding;
     cin >> type;
 
-    switch(selection) {
+    switch (selection) {
         case 0:
             renderImage(path.c_str(), (EncodeType) type);
             break;

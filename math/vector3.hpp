@@ -2,6 +2,8 @@
 #define TEXTO_VECTOR3_HPP
 
 
+#include "matrix.hpp"
+
 class Vector3 {
 public:
     float x, y, z;
@@ -14,6 +16,9 @@ public:
     Vector3 &operator-=(const Vector3 &v);
 
     float &operator[](int i);
+
+    // other operations
+    Vector3 TransformCoordinate(Vector3 &coordinate, Matrix<float> &transform);
 };
 
 

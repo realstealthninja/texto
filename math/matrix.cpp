@@ -22,20 +22,20 @@ template<typename T>
 Matrix<T> &Matrix<T>::operator=(const Matrix<T> &_matrix) {
     if (&_matrix == this) return *this;
 
-    unsigned new_rows = _matrix.get_rows();
-    unsigned new_cols = _matrix.get_cols();
+    unsigned newRows = _matrix.get_rows();
+    unsigned newCols = _matrix.get_cols();
 
-    matrix.resize(new_rows);
+    matrix.resize(newRows);
     for (unsigned i{0}; i < matrix.size(); i++)
-        matrix[i].resize(new_cols);
+        matrix[i].resize(newCols);
 
-    for (unsigned i{0}; i < new_cols; i++){
-        for (unsigned j{0}; j < new_rows; j++)
+    for (unsigned i{0}; i < newCols; i++){
+        for (unsigned j{0}; j < newRows; j++)
             matrix[i][j] = _matrix[i][j];
     }
 
-    rows = new_rows;
-    cols = new_cols;
+    rows = newRows;
+    cols = newCols;
 
     return *this;
 }
@@ -187,12 +187,12 @@ std::vector<T> Matrix<T>::diagonal_vector() {
 
 template<typename T>
 T &Matrix<T>::operator()(const unsigned int &row, const unsigned int &col) {
-    return this->matrix[row][col];
+    return this->matrix[row-1][col-1];
 }
 
 template<typename T>
 const T &Matrix<T>::operator()(const unsigned int &row, const unsigned int &col) const {
-    return this->matrix[row][col];
+    return this->matrix[row-1][col-1];
 }
 
 template<typename T>

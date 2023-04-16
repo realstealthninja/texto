@@ -18,7 +18,7 @@ public:
     Matrix<T>& operator= (const Matrix<T>& _matrix);
 
     Matrix<T> operator+ (const Matrix<T>& _matrix);
-    Matrix<T>& operator+= (const Matrix<T>& _matrix);
+    Matrix<T>& operator+= (const Matrix<T>&matrix);
     Matrix<T> operator- (const Matrix<T>& _matrix);
     Matrix<T>& operator-= (const Matrix<T>& _matrix);
     Matrix<T> operator* (const Matrix<T>& _matrix);

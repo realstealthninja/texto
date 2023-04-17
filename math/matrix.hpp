@@ -1,6 +1,7 @@
 #ifndef TEXTO_MATRIX_HPP
 #define TEXTO_MATRIX_HPP
 
+#include "vector3.hpp"
 #include <vector>
 
 // this implementation of the matrix was stolen from https://www.quantstart.com/articles/Matrix-Classes-in-C-The-Header-File/
@@ -31,13 +32,15 @@ public:
     Matrix<T> operator/(const T& num);
 
     std::vector<T> operator*(const std::vector<T>& vector);
-    std::vector<T> diagonal_vector();
+    [[maybe_unused]] std::vector<T> diagonalVector();
 
     T& operator()(const unsigned& row, const unsigned& col);
     const T& operator()(const unsigned& row, const unsigned& col) const;
 
-    [[nodiscard]] unsigned get_rows() const;
-    [[nodiscard]] unsigned get_cols() const;
+    [[nodiscard]] unsigned getRows() const;
+    [[nodiscard]] unsigned getCols() const;
+
+    Matrix<T> lookAt(Vector3 &eye, Vector3 &target, Vector3 &up);
 };
 
 #endif //TEXTO_MATRIX_HPP

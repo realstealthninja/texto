@@ -13,5 +13,5 @@ add_executable(
         3d.hpp
         math/matrix.cpp
         math/matrix.hpp
-        math/vector2.cpp math/vector2.hpp math/vector3.cpp math/vector3.hpp main.hpp math/Vector4.cpp math/Vector4.hpp)
+        math/vector2.cpp math/vector2.hpp math/vector3.cpp math/vector3.hpp main.hpp math/vector4.cpp math/vector4.hpp)
 target_link_libraries(texto ${OpenCV_LIBS})

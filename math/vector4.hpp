@@ -2,7 +2,7 @@
 #define TEXTO_VECTOR4_HPP
 
 
-class Vector4 {
+class vector4 {
 public:
     float x,y,z,w;
 };

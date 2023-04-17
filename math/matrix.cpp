@@ -14,16 +14,16 @@ Matrix<T>::Matrix(unsigned int _rows, unsigned int _cols, const T &t) {
 template<typename T>
 Matrix<T>::Matrix(const Matrix<T> &_matrix) {
     matrix = _matrix.matrix;
-    rows = _matrix.get_rows();
-    cols = _matrix.get_cols();
+    rows = _matrix.getRows();
+    cols = _matrix.getCols();
 }
 
 template<typename T>
 Matrix<T> &Matrix<T>::operator=(const Matrix<T> &_matrix) {
     if (&_matrix == this) return *this;
 
-    unsigned newRows = _matrix.get_rows();
-    unsigned newCols = _matrix.get_cols();
+    unsigned newRows = _matrix.getRows();
+    unsigned newCols = _matrix.getCols();
 
     matrix.resize(newRows);
     for (unsigned i{0}; i < matrix.size(); i++)
@@ -62,8 +62,8 @@ Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
-    for (unsigned i{0}; i < _matrix.get_rows(); i++)
-        for (unsigned j{0}; j < _matrix.get_cols(); j++)
+    for (unsigned i{0}; i < _matrix.getRows(); i++)
+        for (unsigned j{0}; j < _matrix.getCols(); j++)
             this->matrix[i][j] += _matrix(i,j);
 
     return *this;
@@ -88,8 +88,8 @@ Matrix<T> &Matrix<T>::operator-=(const Matrix<T> &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
-    for (unsigned i{0}; i < _matrix.get_rows(); i++)
-        for (unsigned j{0}; j < _matrix.get_cols(); j++)
+    for (unsigned i{0}; i < _matrix.getRows(); i++)
+        for (unsigned j{0}; j < _matrix.getCols(); j++)
             this->matrix[i][j] -= _matrix(i,j);
 
     return *this;
@@ -97,11 +97,11 @@ Matrix<T> &Matrix<T>::operator-=(const Matrix<T> &_matrix) {
 
 template<typename T>
 Matrix<T> Matrix<T>::operator*(const Matrix<T> &_matrix) {
-    Matrix result(_matrix.get_rows(), _matrix.get_cols(), 0.0);
+    Matrix result(_matrix.getRows(), _matrix.getCols(), 0.0);
 
-    for(unsigned i{0}; i < _matrix.get_rows(); i++)
-        for(unsigned j{0}; j < _matrix.get_cols(); j++)
-            for (unsigned k{0}; k < _matrix.get_rows(); k++)
+    for(unsigned i{0}; i < _matrix.getRows(); i++)
+        for(unsigned j{0}; j < _matrix.getCols(); j++)
+            for (unsigned k{0}; k < _matrix.getRows(); k++)
                 result(i,j) += this->mat[i][k] * _matrix(k,j);
 
     return result;
@@ -175,7 +175,7 @@ std::vector<T> Matrix<T>::operator*(const std::vector<T> &vector) {
 }
 
 template<typename T>
-std::vector<T> Matrix<T>::diagonal_vector() {
+[[maybe_unused]] std::vector<T> Matrix<T>::diagonalVector() {
     std::vector<T> result(rows, 0.0);
 
     for (unsigned i=0; i<rows; i++) {
@@ -196,16 +196,25 @@ const T &Matrix<T>::operator()(const unsigned int &row, const unsigned int &col)
 }
 
 template<typename T>
-unsigned Matrix<T>::get_rows() const {
+unsigned Matrix<T>::getRows() const {
     return this->rows;
 }
 
 template<typename T>
-unsigned Matrix<T>::get_cols() const {
+unsigned Matrix<T>::getCols() const {
     return this->cols;
 }
+template<typename T>
+Matrix<T> Matrix<T>::lookAt(vector3 &eye, vector3 &target, vector3 &up) {
+    vector3 xAxis, yAxis, zAxis;
+    zAxis = target - eye;
+    zAxis.normalize();
+    xAxis = up.cross(zAxis);
+    xAxis.normalize();
+    yAxis = zAxis.cross(xAxis);
 
-
-
-
-
+    this = Matrix<float>(this->getRows(), this->getCols(),1.0f);
+    this(1,1) = xAxis.x; this(2,1) = xAxis.y; this(3,1) = xAxis.z;
+    this(1,2) = yAxis.x; this(2,2) = yAxis.y; this(3,2) = yAxis.z;
+    this(1,3) = zAxis.x; this(2,3) = zAxis.y; this(3,3) = zAxis.z;
+}

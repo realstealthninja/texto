@@ -40,7 +40,7 @@ public:
     [[nodiscard]] unsigned getRows() const;
     [[nodiscard]] unsigned getCols() const;
 
-    Matrix<T> lookAt(Vector3 &eye, Vector3 &target, Vector3 &up);
+    Matrix<T> lookAt(vector3 &eye, vector3 &target, vector3 &up);
 };
 
 #endif //TEXTO_MATRIX_HPP

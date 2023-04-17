@@ -1,5 +1,6 @@
-#include "cassert"
 #include "matrix.hpp"
+#include "cassert"
+#include <complex>
 
 template<typename T>
 Matrix<T>::Matrix(unsigned int _rows, unsigned int _cols, const T &t) {
@@ -217,4 +218,20 @@ Matrix<T> Matrix<T>::lookAt(vector3 &eye, vector3 &target, vector3 &up) {
     this(1,1) = xAxis.x; this(2,1) = xAxis.y; this(3,1) = xAxis.z;
     this(1,2) = yAxis.x; this(2,2) = yAxis.y; this(3,2) = yAxis.z;
     this(1,3) = zAxis.x; this(2,3) = zAxis.y; this(3,3) = zAxis.z;
+}
+template<typename T>
+Matrix<T> Matrix<T>::perspectiveFovRH(
+        float fov,
+        float aspect,
+        float zNear,
+        float zFar)
+{
+        auto yScale = (float)(1.0f / std::tan(fov * 0.5f));
+        float q = zFar / (zNear - zFar);
+
+        this(1,1) = yScale / aspect;
+        this(2,2) = yScale;
+        this(3,3) = q;
+        this(3,4) = -1.0f;
+        this(4,3) = q * zNear;
 }

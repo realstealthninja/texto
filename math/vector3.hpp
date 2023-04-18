@@ -16,11 +16,13 @@ public:
     vector3 &operator-=(const vector3 &v);
     vector3 &operator*= (const vector3 &v);
 
+    vector3 &operator*= (const float &n);
+
     float &operator[](int i);
 
     // other operations
     vector3 TransformCoordinate(vector3 &coordinate, Matrix<float> &transform);
-    vector3 cross(vector3 &v);
+    vector3 cross(vector3 &v) const;
     void normalize();
 };
 

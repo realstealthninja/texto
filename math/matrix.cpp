@@ -220,7 +220,7 @@ Matrix<T> Matrix<T>::lookAt(vector3 &eye, vector3 &target, vector3 &up) {
     this(1,3) = zAxis.x; this(2,3) = zAxis.y; this(3,3) = zAxis.z;
 }
 template<typename T>
-Matrix<T> Matrix<T>::perspectiveFovRH(
+Matrix<T> Matrix<T>::perspectiveFovRh(
         float fov,
         float aspect,
         float zNear,

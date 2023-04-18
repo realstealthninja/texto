@@ -41,7 +41,7 @@ public:
     [[nodiscard]] unsigned getCols() const;
 
     Matrix<T> lookAt(vector3 &eye, vector3 &target, vector3 &up);
-    Matrix<T> perspectiveFovRH(float fov, float aspect, float zNear, float zFar);
+    Matrix<T> perspectiveFovRh(float fov, float aspect, float zNear, float zFar);
 
 };
 

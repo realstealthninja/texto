@@ -2,6 +2,7 @@
 #define TEXTO_MATRIX_HPP
 
 #include "vector3.hpp"
+#include "vector4.hpp"
 #include <vector>
 
 // this implementation of the matrix was stolen from https://www.quantstart.com/articles/Matrix-Classes-in-C-The-Header-File/
@@ -42,7 +43,9 @@ public:
 
     Matrix<T> lookAt(vector3 &eye, vector3 &target, vector3 &up);
     Matrix<T> perspectiveFovRh(float fov, float aspect, float zNear, float zFar);
-    Matrix<T> rotationYawPitchRoll()
+    Matrix<T> rotationYawPitchRoll(float yaw, float pitch, float roll);
+    Matrix<T> translation(vector3 &v);
+    Matrix<T> rotationQuaternion(vector4 quaternion);
 };
 
 #endif //TEXTO_MATRIX_HPP

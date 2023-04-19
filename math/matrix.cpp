@@ -1,5 +1,6 @@
 #include "matrix.hpp"
 #include "cassert"
+#include "vector4.hpp"
 #include <complex>
 
 template<typename T>
@@ -234,4 +235,50 @@ Matrix<T> Matrix<T>::perspectiveFovRh(
         this(3,3) = q;
         this(3,4) = -1.0f;
         this(4,3) = q * zNear;
+}
+
+template<typename T>
+Matrix<T> Matrix<T>::rotationQuaternion(vector4 quaternion) {
+    Matrix<float> result(4,4, 0.0);
+    
+    float xx = quaternion.x * quaternion.x;
+    float yy = quaternion.y * quaternion.y;
+    float zz = quaternion.z * quaternion.z;
+    float xy = quaternion.x * quaternion.y;
+    float zw = quaternion.z * quaternion.w;
+    float zx = quaternion.z * quaternion.x;
+    float yw = quaternion.y * quaternion.w;
+    float yz = quaternion.y * quaternion.z;
+    float xw = quaternion.x * quaternion.w;
+
+    result(1,1) = 1.0f - (2.0f * yy);
+    result(1,2) = 2.0f * (xy + zw);
+    result(1,3) = 2.0f * (zx - yw);
+    result(2,1) = 2.0f * (xy - zw);
+    result(2,2) = 1.0f - (2.0f * (zz + xx));
+    result(2,3) = 2.0f * (yz + xw);
+    result(3,1) = 2.0f * (zx + yw);
+    result(3,2) = 2.0f * (yz - xw);
+    result(3,3) = 1.0f - (2.0f * (yy +xx));
+    result(4,4) = 1.0;
+}
+
+template<typename T>
+Matrix<T> Matrix<T>::rotationYawPitchRoll(float yaw, float pitch, float roll) {
+    vector4 quaternion(0.0);
+    quaternion = quaternion.rotationYawPitchRoll(yaw, pitch, roll);
+    return rotationQuaternion(quaternion);
+}
+template<typename T>
+Matrix<T> Matrix<T>::translation(vector3 &v) {
+    Matrix<float> result(4,4, 0.0);
+    result(1,1) = 1.0f;
+    result(2,2) = 1.0f;
+    result(3,3) = 1.0f;
+    result(4,4) = 1.0f;
+
+    result(4,1) = v.x;
+    result(4,2) = v.y;
+    result(4,3) = v.z;
+    return result;
 }

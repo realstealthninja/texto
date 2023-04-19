@@ -61,18 +61,16 @@ vector3 vector3::cross(vector3 &v) const {
             (x * v.y) - (y * v.x)
     );
 }
-void vector3::normalize() {
-    float length = std::sqrt((x*x) + (y*y) + (z*z));
-    if (length != 0){
-        float inverse = 1.0f / length;
-        x *= inverse;
-        y *= inverse;
-        z *= inverse;
-    }
-}
 vector3 &vector3::operator*=(const float &n) {
     x *= n;
     y *= n;
     z *= n;
     return *this;
+}
+void vector3::normalize() {
+    float length = std::sqrt((x*x) + (y*y) + (z*z));
+    if (length != 0){
+        float inverse = 1.0f / length;
+        *this *= inverse;
+    }
 }

@@ -42,7 +42,7 @@ public:
 
     Matrix<T> lookAt(vector3 &eye, vector3 &target, vector3 &up);
     Matrix<T> perspectiveFovRh(float fov, float aspect, float zNear, float zFar);
-
+    Matrix<T> rotationYawPitchRoll()
 };
 
 #endif //TEXTO_MATRIX_HPP

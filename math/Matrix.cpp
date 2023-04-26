@@ -1,10 +1,10 @@
-#include "matrix.hpp"
-#include "cassert"
+#include "Matrix.hpp"
 #include "vector4.hpp"
+#include <cassert>
 #include <complex>
 
-template<typename T>
-Matrix<T>::Matrix(unsigned int _rows, unsigned int _cols, const T &t) {
+
+Matrix::Matrix(unsigned int _rows, unsigned int _cols, float t) {
     matrix.resize(_rows);
     for (unsigned i{0}; i < matrix.size(); i++) {
         matrix[i].resize(_cols, t);
@@ -13,15 +13,15 @@ Matrix<T>::Matrix(unsigned int _rows, unsigned int _cols, const T &t) {
     cols = _cols;
 }
 
-template<typename T>
-Matrix<T>::Matrix(const Matrix<T> &_matrix) {
+
+Matrix::Matrix(const Matrix &_matrix) {
     matrix = _matrix.matrix;
     rows = _matrix.getRows();
     cols = _matrix.getCols();
 }
 
-template<typename T>
-Matrix<T> &Matrix<T>::operator=(const Matrix<T> &_matrix) {
+
+Matrix &Matrix::operator=(const Matrix &_matrix) {
     if (&_matrix == this) return *this;
 
     unsigned newRows = _matrix.getRows();
@@ -33,7 +33,7 @@ Matrix<T> &Matrix<T>::operator=(const Matrix<T> &_matrix) {
 
     for (unsigned i{0}; i < newCols; i++){
         for (unsigned j{0}; j < newRows; j++)
-            matrix[i][j] = _matrix[i][j];
+            matrix[i][j] = _matrix.matrix[i][j];
     }
 
     rows = newRows;
@@ -42,11 +42,8 @@ Matrix<T> &Matrix<T>::operator=(const Matrix<T> &_matrix) {
     return *this;
 }
 
-template<typename T>
-Matrix<T>::~Matrix() = default;
 
-template<typename T>
-Matrix<T> Matrix<T>::operator+(const Matrix<T> &_matrix) {
+Matrix Matrix::operator+(const Matrix &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
@@ -59,8 +56,8 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T> &_matrix) {
     return result;
 }
 
-template<typename T>
-Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &_matrix) {
+
+Matrix &Matrix::operator+=(const Matrix &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
@@ -71,8 +68,8 @@ Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &_matrix) {
     return *this;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::operator-(const Matrix<T> &_matrix) {
+
+Matrix Matrix::operator-(const Matrix &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
@@ -85,8 +82,8 @@ Matrix<T> Matrix<T>::operator-(const Matrix<T> &_matrix) {
     return result;
 }
 
-template<typename T>
-Matrix<T> &Matrix<T>::operator-=(const Matrix<T> &_matrix) {
+
+Matrix &Matrix::operator-=(const Matrix &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
@@ -97,117 +94,121 @@ Matrix<T> &Matrix<T>::operator-=(const Matrix<T> &_matrix) {
     return *this;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::operator*(const Matrix<T> &_matrix) {
+
+Matrix Matrix::operator*(const Matrix &_matrix) {
     Matrix result(_matrix.getRows(), _matrix.getCols(), 0.0);
 
     for(unsigned i{0}; i < _matrix.getRows(); i++)
         for(unsigned j{0}; j < _matrix.getCols(); j++)
             for (unsigned k{0}; k < _matrix.getRows(); k++)
-                result(i,j) += this->mat[i][k] * _matrix(k,j);
+                result(i,j) += this->matrix[i][k] * _matrix(k,j);
 
     return result;
 }
 
-template<typename T>
-Matrix<T> &Matrix<T>::operator*=(const Matrix<T> &_matrix) {
+
+Matrix &Matrix::operator*=(const Matrix &_matrix) {
     Matrix result = (*this) * _matrix;
     (*this) = result;
     return *this;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::transpose() {
+
+Matrix Matrix::transpose() {
     Matrix result(rows, cols, 0.0);
 
     for (unsigned i=0; i<rows; i++) {
         for (unsigned j=0; j<cols; j++) {
-            result(i,j) = this->mat[j][i];
+            result(i,j) = this->matrix[j][i];
         }
     }
 
     return result;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::operator+(const T &num) {
+
+Matrix Matrix::operator+(float num) {
     Matrix result(rows, cols, 0.0);
 
     for (unsigned i{0}; i < rows; i++)
         for (unsigned j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] + num;
+    return result;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::operator-(const T &num) {
+
+Matrix Matrix::operator-(float num) {
     Matrix result(rows, cols, 0.0);
 
     for (unsigned i{0}; i < rows; i++)
         for (unsigned j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] - num;
+    return result;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::operator*(const T &num) {
+
+Matrix Matrix::operator*(float num) {
     Matrix result(rows, cols, 0.0);
 
     for (unsigned i{0}; i < rows; i++)
         for (unsigned j{0}; j < cols; j++)
-            result(i,j) = this->matrix[i][j] * num;
+            result(i,j) = this->matrix.at(i).at(j) * num;
+    return result;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::operator/(const T &num) {
+
+Matrix Matrix::operator/(float num) {
     Matrix result(rows, cols, 0.0);
 
     for (unsigned i{0}; i < rows; i++)
         for (unsigned j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] / num;
+    return result;
 }
 
-template<typename T>
-std::vector<T> Matrix<T>::operator*(const std::vector<T> &vector) {
-    std::vector<T> result(vector.size(), 0.0);
+
+std::vector<float> Matrix::operator*(const std::vector<float> &vector) {
+    std::vector<float> result(vector.size(), 0.0);
 
     for (unsigned i=0; i<rows; i++)
         for (unsigned j=0; j<cols; j++)
-            result[i] = this->mat[i][j] * vector[j];
+            result[i] = this->matrix[i][j] * vector[j];
 
     return result;
 }
 
-template<typename T>
-[[maybe_unused]] std::vector<T> Matrix<T>::diagonalVector() {
-    std::vector<T> result(rows, 0.0);
+
+[[maybe_unused]] std::vector<float> Matrix::diagonalVector() {
+    std::vector<float> result(rows, 0.0);
 
     for (unsigned i=0; i<rows; i++) {
-        result[i] = this->mat[i][i];
+        result[i] = this->matrix[i][i];
     }
 
     return result;
 }
 
-template<typename T>
-T &Matrix<T>::operator()(const unsigned int &row, const unsigned int &col) {
+
+float &Matrix::operator()(const unsigned int &row, const unsigned int &col) {
     return this->matrix[row-1][col-1];
 }
 
-template<typename T>
-const T &Matrix<T>::operator()(const unsigned int &row, const unsigned int &col) const {
+
+const float &Matrix::operator()(const unsigned int &row, const unsigned int &col) const {
     return this->matrix[row-1][col-1];
 }
 
-template<typename T>
-unsigned Matrix<T>::getRows() const {
+
+unsigned Matrix::getRows() const {
     return this->rows;
 }
 
-template<typename T>
-unsigned Matrix<T>::getCols() const {
+
+unsigned Matrix::getCols() const {
     return this->cols;
 }
-template<typename T>
-Matrix<T> Matrix<T>::lookAt(vector3 &eye, vector3 &target, vector3 &up) {
+
+Matrix Matrix::lookAt(vector3 &eye, vector3 &target, vector3 &up) const {
     vector3 xAxis, yAxis, zAxis;
     zAxis = target - eye;
     zAxis.normalize();
@@ -215,13 +216,17 @@ Matrix<T> Matrix<T>::lookAt(vector3 &eye, vector3 &target, vector3 &up) {
     xAxis.normalize();
     yAxis = zAxis.cross(xAxis);
 
-    this = Matrix<float>(this->getRows(), this->getCols(),1.0f);
-    this(1,1) = xAxis.x; this(2,1) = xAxis.y; this(3,1) = xAxis.z;
-    this(1,2) = yAxis.x; this(2,2) = yAxis.y; this(3,2) = yAxis.z;
-    this(1,3) = zAxis.x; this(2,3) = zAxis.y; this(3,3) = zAxis.z;
+    Matrix result = Matrix(this->getRows(), this->getCols(), 0.0f);
+    result(2,2) = 1.0f;
+    result(3,3) = 1.0f;
+    result(4,4) = 1.0f;
+    result(1,1) = xAxis.x; result(2,1) = xAxis.y; result(3,1) = xAxis.z;
+    result(1,2) = yAxis.x; result(2,2) = yAxis.y; result(3,2) = yAxis.z;
+    result(1,3) = zAxis.x; result(2,3) = zAxis.y; result(3,3) = zAxis.z;
+    return result;
 }
-template<typename T>
-Matrix<T> Matrix<T>::perspectiveFovRh(
+
+void Matrix::perspectiveFovRh(
         float fov,
         float aspect,
         float zNear,
@@ -230,16 +235,16 @@ Matrix<T> Matrix<T>::perspectiveFovRh(
         auto yScale = (float)(1.0f / std::tan(fov * 0.5f));
         float q = zFar / (zNear - zFar);
 
-        this(1,1) = yScale / aspect;
-        this(2,2) = yScale;
-        this(3,3) = q;
-        this(3,4) = -1.0f;
-        this(4,3) = q * zNear;
+        this->matrix[0][0] = yScale / aspect;
+        this->matrix[1][1] = yScale;
+        this->matrix[2][2] = q;
+        this->matrix[2][3] = -1.0f;
+        this->matrix[3][2] = q * zNear;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::rotationQuaternion(vector4 quaternion) {
-    Matrix<float> result(4,4, 0.0);
+
+Matrix Matrix::rotationQuaternion(vector4 quaternion) {
+    Matrix result(4,4, 0.0);
     
     float xx = quaternion.x * quaternion.x;
     float yy = quaternion.y * quaternion.y;
@@ -261,17 +266,20 @@ Matrix<T> Matrix<T>::rotationQuaternion(vector4 quaternion) {
     result(3,2) = 2.0f * (yz - xw);
     result(3,3) = 1.0f - (2.0f * (yy +xx));
     result(4,4) = 1.0;
+    return result;
 }
 
-template<typename T>
-Matrix<T> Matrix<T>::rotationYawPitchRoll(float yaw, float pitch, float roll) {
+
+Matrix Matrix::rotationYawPitchRoll(float yaw, float pitch, float roll) {
     vector4 quaternion(0.0);
     quaternion = quaternion.rotationYawPitchRoll(yaw, pitch, roll);
-    return rotationQuaternion(quaternion);
+    Matrix result(4,4, 0.0f);
+    result = rotationQuaternion(quaternion);
+    return result;
 }
-template<typename T>
-Matrix<T> Matrix<T>::translation(vector3 &v) {
-    Matrix<float> result(4,4, 0.0);
+
+Matrix Matrix::translation(vector3 v) {
+    Matrix result(4,4, 0.0);
     result(1,1) = 1.0f;
     result(2,2) = 1.0f;
     result(3,3) = 1.0f;
@@ -281,4 +289,13 @@ Matrix<T> Matrix<T>::translation(vector3 &v) {
     result(4,2) = v.y;
     result(4,3) = v.z;
     return result;
+}
+vector3 Matrix::transformCoordinate(const vector3& v) const {
+    auto vector = vector4(1);
+    vector.x = (v.x * this->matrix[0][0]) + (v.y * this->matrix[1][0]) + (v.z * this->matrix[2][0]) + this->matrix[3][0];
+    vector.y = (v.x * this->matrix[0][1]) + (v.y * this->matrix[1][1]) + (v.z * this->matrix[2][1]) + this->matrix[3][1];
+    vector.z = (v.x * this->matrix[0][2]) + (v.y * this->matrix[1][2]) + (v.z * this->matrix[2][2]) + this->matrix[3][2];
+    vector.w = 1.0f / (v.x * this->matrix[0][3]) + (v.y * this->matrix[1][3]) + (v.z * this->matrix[2][3]) + this->matrix[3][3];
+
+    return vector3(vector.x * vector.w, vector.y * vector.w, vector.z * vector.w);
 }

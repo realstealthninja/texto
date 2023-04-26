@@ -1,9 +1,6 @@
 #ifndef TEXTO_VECTOR3_HPP
 #define TEXTO_VECTOR3_HPP
 
-
-#include "matrix.hpp"
-
 class vector3 {
 public:
     float x, y, z;
@@ -21,7 +18,6 @@ public:
     float &operator[](int i);
 
     // other operations
-    vector3 TransformCoordinate(vector3 &coordinate, Matrix<float> &transform);
     vector3 cross(vector3 &v) const;
     void normalize();
 };

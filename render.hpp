@@ -21,5 +21,6 @@ void renderImage(const char* path, EncodeType encodeType);
 
 void renderVideo(const char* path, EncodeType encodeType);
 
+[[noreturn]] void render3D();
 
 #endif //TEXTO_RENDER_HPP

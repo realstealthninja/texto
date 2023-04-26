@@ -31,5 +31,7 @@ float &vector2::operator[](int i) {
             return x;
         case 1:
             return y;
+        default:
+            return x;
     }
 }

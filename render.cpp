@@ -1,12 +1,13 @@
 #include "render.hpp"
+#include "scales.hpp"
+#include "3d.hpp"
+#include <chrono>
 #include <iostream>
-#include <vector>
 #include <opencv2/opencv.hpp>
 #include <sys/ioctl.h>
-#include <chrono>
 #include <thread>
 #include <unistd.h>
-#include "scales.hpp"
+#include <vector>
 
 using namespace cv;
 using namespace std;
@@ -17,22 +18,22 @@ struct winsize w{};
 vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE) {
     vector<string> lines;
     Mat colors[3];
-    std::string SCALE;
+    std::string scale;
 
     switch (encodeType){
         case GSCALE:
-            SCALE = GRAYSCALE;
+            scale = constants::grayscale;
             break;
         case RGB:
             split(material, colors);
             cvtColor(material, material, COLOR_BGR2GRAY);
-            SCALE = GRAYSCALE;
+            scale = constants::grayscale;
             break;
         case SHORT_GSCALE:
-            SCALE = SHORT_GRAYSCALE;
+            scale = constants::shortGrayscale;
             break;
         case REVERSE_GSCALE:
-            SCALE = REVERSED_GRAYSCALE;
+            scale = constants::reversedGrayscale;
     }
 
     for (int i{0}; i < material.rows; i++) {
@@ -47,9 +48,9 @@ vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE
                         (int)colors[2].at<uchar>(i,j),
                         (int)colors[1].at<uchar>(i,j),
                         (int)colors[0].at<uchar>(i,j),
-                        GRAYSCALE[pixel % GRAYSCALE.length()]);
+                        constants::grayscale[pixel % constants::grayscale.length()]);
             } else {
-                line += SCALE[pixel % SCALE.length()];
+                line += scale[pixel % scale.length()];
             }
         }
         lines.push_back(line);
@@ -106,5 +107,31 @@ void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
     }
 
     video.release();
+}
+
+void render3D() {
+
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    textoEngine::renderer renderer((int) w.ws_col, (int) w.ws_row);
+    textoEngine::camera cam(
+            vector3(0,0,10.0f),
+            vector3(0,0,0)
+    );
+    textoEngine::mesh mesh("cube");
+    mesh.vertices.emplace_back(-1,1,1);
+    mesh.vertices.emplace_back(1,1,1);
+    mesh.vertices.emplace_back(-1,-1,1);
+    mesh.vertices.emplace_back(-1,-1,-1);
+    mesh.vertices.emplace_back(-1,1,-1);
+    mesh.vertices.emplace_back(1,1,-1);
+    mesh.vertices.emplace_back(1,-1,1);
+    mesh.vertices.emplace_back(1,-1,-1);
+    std::vector<textoEngine::mesh> meshes;
+    meshes.push_back(mesh);
+    while(true) {
+        renderer.clear(rgba(0,0,0,255));
+        renderer.render(cam, meshes);
+        renderer.present();
+    }
 }
 

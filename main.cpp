@@ -22,6 +22,8 @@ int main() {
         case 1:
             renderVideo(path.c_str(), (EncodeType) type);
             break;
+        case 2:
+            render3D();
         default:
             cout << "please pick either 0 or 1 ";
             break;

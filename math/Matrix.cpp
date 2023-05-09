@@ -101,7 +101,7 @@ Matrix Matrix::operator*(const Matrix &_matrix) {
     for(unsigned i{0}; i < _matrix.getRows(); i++)
         for(unsigned j{0}; j < _matrix.getCols(); j++)
             for (unsigned k{0}; k < _matrix.getRows(); k++)
-                result(i,j) += this->matrix[i][k] * _matrix(k,j);
+                result.matrix[i][j] += this->matrix[i][k] * _matrix.matrix[i][k];
 
     return result;
 }
@@ -152,7 +152,7 @@ Matrix Matrix::operator*(float num) {
 
     for (unsigned i{0}; i < rows; i++)
         for (unsigned j{0}; j < cols; j++)
-            result(i,j) = this->matrix.at(i).at(j) * num;
+            result.matrix[i][j] = this->matrix.at(i).at(j) * num;
     return result;
 }
 
@@ -291,7 +291,7 @@ Matrix Matrix::translation(vector3 v) {
     return result;
 }
 vector3 Matrix::transformCoordinate(const vector3& v) const {
-    auto vector = vector4(1);
+    auto vector = vector4(1,1,1,1);
     vector.x = (v.x * this->matrix[0][0]) + (v.y * this->matrix[1][0]) + (v.z * this->matrix[2][0]) + this->matrix[3][0];
     vector.y = (v.x * this->matrix[0][1]) + (v.y * this->matrix[1][1]) + (v.z * this->matrix[2][1]) + this->matrix[3][1];
     vector.z = (v.x * this->matrix[0][2]) + (v.y * this->matrix[1][2]) + (v.z * this->matrix[2][2]) + this->matrix[3][2];

@@ -1,8 +1,8 @@
 #include "vector2.hpp"
-#include "cassert"
+#include <cassert>
 
-vector2::vector2(float x, float y) : x(x), y(y){};
-vector2::vector2(const vector2 &vector) : x(vector.x), y(vector.y) {}
+vector2::vector2(float x, float y) : x(x), y(y) {};
+vector2::vector2(const vector2 &vector) : x(vector.x), y(vector.y) {};
 
 vector2 vector2::operator+(const vector2 &v) const {
     return vector2(x + v.x, y + v.y);

@@ -1,5 +1,7 @@
 #include "3d.hpp"
 #include "scales.hpp"
+#include <thread>
+#include <chrono>
 #include <opencv2/opencv.hpp>
 #include <string>
 #include <utility>
@@ -37,26 +39,32 @@ namespace textoEngine {
     renderer::renderer(int width, int height) {
         this->width = width;
         this->height = height;
-        buffer = std::vector<std::vector<std::string> >();
+        this->buffer = std::vector<std::vector<std::string> > {};
     }
     void renderer::clear(rgba colour) {
-        for (int i; i < height; i++) {
-            for (int j; j < width; j++) {
-                buffer[i][j] = cv::format(
+        for (int i{0}; i < height; i++) {
+            std::vector<std::string> line;
+            for (int j{0}; j < width; j++) {
+                line.push_back(cv::format(
                         "\033[48;2;%i;%i;%im%c\033[0m",
                         colour.r,
                         colour.g,
                         colour.b,
-                        constants::grayscale[colour.a % constants::grayscale.length()]);
+                        constants::grayscale[colour.a % constants::grayscale.length()])
+                );
             }
+            buffer.push_back(line);
         }
     }
     void renderer::present() {
-        for (int i ; i < height; i++) {
-            for (int j; j< width; j++){
-                std::cout << buffer[i][j] + "\n";
+        system("clear");
+        for (int i{0}; i < height; i++) {
+            for (int j{0}; j < width; j++){
+                std::cout << buffer.at(i).at(j);
             }
+            std::cout << "\n";
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds((int)1000/60));
     }
     void renderer::putText(int x, int y, rgba colour) {
         buffer[x][y] = cv::format(
@@ -74,7 +82,7 @@ namespace textoEngine {
     }
     void renderer::drawText(vector2 &point) {
         if (point.x >= 0 && point.y >= 0 && point.x <(float) width && point.y < (float) height) {
-            putText((int)point.x, (int)point.y, rgba(1, 1, 1, 1));
+            putText((int)point.x, (int)point.y, rgba(1, 1, 1, 255));
         }
     }
     void renderer::render(camera &cam, std::vector<mesh> &meshes) {

@@ -112,7 +112,7 @@ void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
 void render3D() {
 
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    textoEngine::renderer renderer((int) w.ws_col, (int) w.ws_row);
+    textoEngine::renderer renderer(w.ws_col, w.ws_row);
     textoEngine::camera cam(
             vector3(0,0,10.0f),
             vector3(0,0,0)
@@ -128,10 +128,11 @@ void render3D() {
     mesh.vertices.emplace_back(1,-1,-1);
     std::vector<textoEngine::mesh> meshes;
     meshes.push_back(mesh);
+    renderer.clear(rgba(0,0,0,0));
     while(true) {
-        renderer.clear(rgba(0,0,0,255));
+        renderer.height = w.ws_row;
+        renderer.width = w.ws_col;
         renderer.render(cam, meshes);
         renderer.present();
     }
 }
-

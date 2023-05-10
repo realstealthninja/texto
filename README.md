@@ -16,7 +16,7 @@ Your one-stop shop for all things related to ascii.
 
 
 
-#### Texto is supposed to be an [ASCII](https://en.wikipedia.org/wiki/ASCII) based renderer.
+<p align="center"> Texto is supposed to be an [ASCII](https://en.wikipedia.org/wiki/ASCII) based renderer.</p>
 
 Table of contents
 =================

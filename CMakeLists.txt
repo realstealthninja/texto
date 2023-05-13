@@ -6,20 +6,21 @@ find_package(OpenCV REQUIRED)
 add_executable(
         texto
         main.cpp
-        main.hpp
-        render.hpp
-        render.cpp
-        scales.hpp
-        3d.cpp
-        3d.hpp
-        math/Matrix.cpp
-        math/Matrix.hpp
-        math/vector2.cpp
-        math/vector2.hpp
-        math/vector3.cpp
-        math/vector3.hpp
-        math/vector4.cpp
-        math/vector4.hpp
-        rgba.hpp
-        scales.cpp)
+        src/main.hpp
+        src/render.hpp
+        src/render.cpp
+        src/scales.hpp
+        src/3d.cpp
+        src/3d.hpp
+        src/math/Matrix.cpp
+        src/math/Matrix.hpp
+        src/math/vector2.cpp
+        src/math/vector2.hpp
+        src/math/vector3.cpp
+        src/math/vector3.hpp
+        src/math/vector4.cpp
+        src/math/vector4.hpp
+        src/rgba.hpp
+        src/scales.cpp
+)
 target_link_libraries(texto ${OpenCV_LIBS})

@@ -1,7 +1,7 @@
-#include "main.hpp"
-#include "render.hpp"
-#include <regex>
+#include "src/main.hpp"
+#include "src/render.hpp"
 #include <iostream>
+#include <regex>
 
 using namespace std;
 

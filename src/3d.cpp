@@ -1,12 +1,12 @@
 #include "3d.hpp"
+#include "../math/Matrix.hpp"
 #include "scales.hpp"
-#include <thread>
 #include <chrono>
 #include <opencv2/opencv.hpp>
 #include <string>
+#include <thread>
 #include <utility>
 #include <vector>
-#include "math/Matrix.hpp"
 
 namespace textoEngine {
     // CAMERA

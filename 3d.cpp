@@ -81,7 +81,7 @@ namespace textoEngine {
         return vector2(x,y);
     }
     void renderer::drawText(vector2 &point) {
-        if (point.x >= 0 && point.y >= 0 && point.x <(float) width && point.y < (float) height) {
+        if (point.x >= 0 && point.y >= 0 && point.x < (float) width && point.y < (float) height) {
             putText((int)point.x, (int)point.y, rgba(1, 1, 1, 255));
         }
     }

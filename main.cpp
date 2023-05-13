@@ -1,10 +1,27 @@
 #include "main.hpp"
 #include "render.hpp"
+#include <regex>
 #include <iostream>
 
 using namespace std;
 
-int main() {
+regex RE_IMAGE("(.*\\.(jpe?g|png|bmp)$)");
+
+int main(int argc, char** argv) {
+
+    EncodeType encodeType = GSCALE;
+    if (argc == 3) {
+        if (strcmp(argv[2], "GSCALE") != 0)
+            encodeType = RGB;
+
+        if (regex_match(argv[1], RE_IMAGE))
+            renderImage(argv[1], encodeType);
+        else
+            renderVideo(argv[1], encodeType);
+
+        return 0;
+    }
+
     int selection;
     int type;
     std::string path;

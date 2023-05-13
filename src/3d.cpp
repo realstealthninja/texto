@@ -1,5 +1,5 @@
 #include "3d.hpp"
-#include "../math/Matrix.hpp"
+#include "math/Matrix.hpp"
 #include "scales.hpp"
 #include <chrono>
 #include <opencv2/opencv.hpp>

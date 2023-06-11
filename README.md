@@ -1,6 +1,6 @@
-![](https://img.shields.io/github/license/realstealthninja/texto?style=flat-square)
-![](https://img.shields.io/github/last-commit/realstealthninja/texto?style=flat-square)
-![](https://img.shields.io/github/repo-size/realstealthninja/texto?style=flat-square)
+![License](https://img.shields.io/github/license/realstealthninja/texto?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/realstealthninja/texto?style=flat-square)
+![Repository size](https://img.shields.io/github/repo-size/realstealthninja/texto?style=flat-square)
 
 <!--suppress ALL -->
 
@@ -16,7 +16,7 @@ Your one-stop shop for all things related to ascii.
 
 
 
-<p align="center"> Texto is supposed to be an [ASCII](https://en.wikipedia.org/wiki/ASCII) based renderer.</p>
+<p align="center"> Texto is supposed to be an <a href=https://en.wikipedia.org/wiki/ASCII>ASCII</a> based renderer.</p>
 
 Table of contents
 =================
@@ -51,7 +51,6 @@ Want to contribute?
 
 <p align="center">Great!</p>
 First off all thank you for even considering contributing.
-You can start by reading the [guidelines](./CODE_OF_CONDUCT.md). and 
-contributing.md (TODO).
+You can start by reading the <a href="./CODE_OF_CONDUCT.md">Code of Conduct</a> and contributing guidelines (TODO).
 
 Please do raise an issue before opening a pull request discussing on how you are implementing the feature.

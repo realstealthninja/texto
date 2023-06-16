@@ -4,9 +4,13 @@
 #include <chrono>
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include <sys/ioctl.h>
 #include <thread>
+#ifdef __WIN32
+#include <winsock2.h>
+#else
+#include <sys/ioctl.h>
 #include <unistd.h>
+#endif
 #include <vector>
 
 using namespace cv;

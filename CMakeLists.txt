@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.25)
-project(texto)
+project(texto
+    LANGUAGES CXX
+    VERSION 1.0.0
+    DESCRIPTION "A text based renderer (soon to be game engine)"
+)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+
 find_package(OpenCV REQUIRED)
 add_executable(
         texto
@@ -23,4 +29,5 @@ add_executable(
         src/rgba.hpp
         src/scales.cpp
 )
+
 target_link_libraries(texto ${OpenCV_LIBS})

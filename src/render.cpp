@@ -43,7 +43,7 @@ vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE
             if (encodeType != GSCALE){
                 // [38 for foreground and 48 for background
                 // shouts out to Leonhard Euler for doing math
-                line += format(
+                line += cv::format(
                         "\033[48;2;%i;%i;%im%c\033[0m",
                         (int)colors[2].at<uchar>(i,j),
                         (int)colors[1].at<uchar>(i,j),
@@ -89,13 +89,13 @@ void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
     double fps = video.get(CAP_PROP_FPS);
     double displayRate = 1000/fps;
 
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
 
     while(true) {
         video >> frame;
 
         if (frame.empty()) break;
-
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         resize(frame, frame, Size((int) w.ws_col, (int)w.ws_row), INTER_LINEAR);
         if(encodeType == GSCALE)
             cvtColor(frame, frame, COLOR_BGR2GRAY);

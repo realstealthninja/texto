@@ -30,14 +30,41 @@ Table of contents
 Installation
 ============
 
-Right now Texto does not offer a prebuilt package. but it does not take a lot to compile
+## Gitpod
+
+By using Gitpod, you can skip all the steps which automatically installs all the necessary dependencies and builds the code.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/realstealthninja/texto)
+
+## Locally
+
+1. Clone the Git repository and its submodules.
+
+```bash
+git clone --recursive https://github.com/realstealthninja/texto.git
+```
+
+2. Install dependencies (Unix/Linux).
+
+```bash
+sudo apt-get update && sudo apt-get install ninja-build libopencv-dev
+```
+
+> **Note:**
+>
+> Ninja Build and OpenCV are also available for MacOs and Windows. Check out their binary releases.
+> <https://github.com/opencv/opencv/releases>
+> <https://github.com/ninja-build/ninja/releases>
+
+3. Build with CMake.
 
 ```bash
 cmake -DCMAKE_BUILD_TYPE=Release -G Ninja -S ./ -B ./cmake-build-release
 cmake --build ./cmake-build-release --target texto -j 1
 ```
 
-or run build.sh
+Currently, Texto does not offer a prebuilt package. but it doesn't take a lot to compile.\
+You can also run `build.sh`, which runs the exact same commands above.
 
 Usage
 =====

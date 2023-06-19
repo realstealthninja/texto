@@ -134,6 +134,7 @@ void render3D() {
     meshes.push_back(mesh);
     renderer.clear(rgba(0,0,0,0));
     while(true) {
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         renderer.height = w.ws_row;
         renderer.width = w.ws_col;
         renderer.render(cam, meshes);

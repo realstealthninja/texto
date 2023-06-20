@@ -75,8 +75,14 @@ namespace textoEngine {
     }
     vector2 renderer::project(const vector3& coordinates, const Matrix& transformationMatrix) const {
         vector3 point = transformationMatrix.transformCoordinate(coordinates);
-        float x =  point.x * (float)width + (float) width/4.0f;
-        float y  = -point.y * (float)height + (float)height/-4.0f;
+        float x =  point.x * (float)width + (float) width/2.0f;
+        /*
+         * current assumptions for segfault is:
+         * 1. somewhere the math is wrong
+         * 2. this is giving us the nth pixel instead of the actual coordinates
+         *
+         */
+        float y  = -point.y * (float)height + (float)height/2.0f;
         return vector2(x, y);
     }
     void renderer::drawText(vector2 &point) {

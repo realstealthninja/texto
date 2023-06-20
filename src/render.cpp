@@ -139,5 +139,6 @@ void render3D() {
         renderer.width = w.ws_col;
         renderer.render(cam, meshes);
         renderer.present();
+        sleep(2);
     }
 }

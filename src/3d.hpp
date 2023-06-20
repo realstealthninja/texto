@@ -14,7 +14,7 @@ namespace textoEngine {
         public:
             vector3 position{};
             vector3 target{};
-            camera(vector3 position, vector3 target);
+            camera(const vector3& position, const vector3& target);
             [[nodiscard]] vector3 getPosition() const;
             [[nodiscard]] vector3 getTarget() const;
     };
@@ -37,8 +37,13 @@ namespace textoEngine {
     class renderer {
     public:
         std::vector<std::vector<std::string> > buffer;
-        int width;
-        int height;
+        int width; ///< width of screen
+        int height; ///< height of screen
+        /**
+         * @brief constructor of renderer
+         * @param width of screen
+         * @param height of screen
+         */
         renderer(int width, int height);
         void clear(rgba color);
         void present();

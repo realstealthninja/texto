@@ -145,6 +145,6 @@ void render3D() {
         renderer.clear(rgba(255,255,255,255));
         renderer.render(cam, meshes);
         renderer.present();
-        sleep(2);
+        mesh.rotation = vector3(mesh.rotation.x + 0.01f, mesh.rotation.y, mesh.rotation.z);
     }
 }

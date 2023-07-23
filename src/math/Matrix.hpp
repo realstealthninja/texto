@@ -10,11 +10,12 @@
 class Matrix {
 private:
     std::vector<std::vector<float> > matrix;
-    unsigned rows;
-    unsigned cols;
+    unsigned rows{};
+    unsigned cols{};
 public:
     Matrix(unsigned _rows, unsigned _cols, float t);
     Matrix(const Matrix& _matrix);
+    Matrix(const vector3& top,const vector3& middle,const vector3& bottom);
 
     Matrix& operator= (const Matrix& _matrix);
 
@@ -31,6 +32,8 @@ public:
     Matrix operator*(float num);
     Matrix operator/(float num);
 
+    static Matrix identity();
+
     std::vector<float> operator*(const std::vector<float>& vector);
     [[maybe_unused]] std::vector<float> diagonalVector();
 
@@ -40,11 +43,16 @@ public:
     [[nodiscard]] unsigned getRows() const;
     [[nodiscard]] unsigned getCols() const;
 
-    Matrix lookAt(vector3 &eye, vector3 &target, vector3 &up) const;
-    void perspectiveFovRh(float fov, float aspect, float zNear, float zFar);
-    Matrix rotationYawPitchRoll(float yaw, float pitch, float roll);
-    Matrix translation(vector3 v);
-    Matrix rotationQuaternion(vector4 quaternion);
+    static Matrix lookAt(vector3 &eye, vector3 &target, vector3 &up) ;
+    void perspectiveFovLh(float fov, float aspect, float zNear, float zFar);
+    static Matrix rotation_yaw(float yaw);
+    static Matrix rotation_pitch(float pitch);
+    static Matrix rotation_roll(float roll);
+    static Matrix rotationYawPitchRoll(float yaw, float pitch, float roll);
+    static Matrix rotationYawPitchRoll(const vector3& v);
+    static Matrix translation(const vector3& v);
+    static Matrix scale(float x, float y, float z);
+    static Matrix scale(const vector3& v);
     [[nodiscard]] vector3 transformCoordinate(const vector3& v) const;
 };
 

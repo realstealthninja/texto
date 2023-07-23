@@ -129,6 +129,8 @@ void render3D() {
     mesh.vertices.emplace_back(1,1,-1);
     mesh.vertices.emplace_back(1,-1,1);
     mesh.vertices.emplace_back(1,-1,-1);
+    mesh.scale = vector3(1,1,1);
+    mesh.position = vector3(0,0,0);
     std::vector<textoEngine::mesh> meshes;
     meshes.push_back(mesh);
     renderer.clear(rgba(0,0,0,0));

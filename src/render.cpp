@@ -1,7 +1,6 @@
 #include "render.hpp"
 #include "scales.hpp"
 #include "3d.hpp"
-#include <chrono>
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <thread>
@@ -118,7 +117,7 @@ void render3D() {
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     textoEngine::renderer renderer(w.ws_col, w.ws_row);
     textoEngine::camera cam(
-            vector3(0,0,10.0f),
+            vector3(0,0,-4.0f),
             vector3(0,0,0)
     );
     textoEngine::mesh mesh("cube");
@@ -137,6 +136,10 @@ void render3D() {
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         renderer.height = w.ws_row;
         renderer.width = w.ws_col;
+        #ifndef NDEBUG
+        renderer.height = 200;
+        renderer.width = 100;
+        #endif
         renderer.render(cam, meshes);
         renderer.present();
         sleep(2);

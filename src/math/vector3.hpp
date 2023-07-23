@@ -10,6 +10,7 @@ public:
     vector3 operator+(const vector3 &v) const;
     vector3 &operator+=(const vector3 &v);
     vector3 operator-(const vector3 &v) const;
+    vector3 operator-() const;
     vector3 &operator-=(const vector3 &v);
     vector3 &operator*= (const vector3 &v);
 
@@ -19,6 +20,7 @@ public:
 
     // other operations
     vector3 cross(vector3 &v) const;
+    float dot(vector3 &v) const;
     void normalize();
 };
 

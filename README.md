@@ -1,6 +1,3 @@
-![License](https://img.shields.io/github/license/realstealthninja/texto?style=flat-square)
-![Last commit](https://img.shields.io/github/last-commit/realstealthninja/texto?style=flat-square)
-![Repository size](https://img.shields.io/github/repo-size/realstealthninja/texto?style=flat-square)
 
 <!--suppress ALL -->
 
@@ -17,6 +14,14 @@ Your one-stop shop for all things related to ascii.
 
 
 <p align="center"> Texto is supposed to be an <a href=https://en.wikipedia.org/wiki/ASCII>ASCII</a> based renderer.</p>
+<div align="center">
+
+![License](https://img.shields.io/github/license/realstealthninja/texto?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/realstealthninja/texto?style=flat-square)
+![Repository size](https://img.shields.io/github/repo-size/realstealthninja/texto?style=flat-square)
+![build](https://img.shields.io/github/actions/workflow/status/realstealthninja/texto/build-project.yml?style=flat-square&logo=github)
+
+</div>
 
 Table of contents
 =================

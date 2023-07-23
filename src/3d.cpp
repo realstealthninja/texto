@@ -23,7 +23,7 @@ namespace textoEngine {
     }
 
     // MESH
-    mesh::mesh(std::string name, vector3 position, vector3 rotation, std::vector<vector3> vertices) {
+    mesh::mesh(std::string name, const vector3& position, vector3 rotation, std::vector<vector3> vertices) {
         this->name = std::move(name);
         this->position = position;
         this->rotation = rotation;
@@ -66,37 +66,42 @@ namespace textoEngine {
         std::this_thread::sleep_for(std::chrono::milliseconds((int)1000/60));
     }
     void renderer::putText(int x, int y, rgba colour) {
-        buffer[x][y] = cv::format(
+        buffer[x][y].assign(cv::format(
                 "\033[48;2;%i;%i;%im%c\033[0m",
                 colour.r,
                 colour.g,
                 colour.b,
-                constants::grayscale[colour.a % constants::grayscale.length()]);
+                constants::grayscale[colour.a % constants::grayscale.length()]));
     }
     vector2 renderer::project(const vector3& coordinates, const Matrix& transformationMatrix) const {
         vector3 point = transformationMatrix.transformCoordinate(coordinates);
-        float x =  point.x * (float)width + (float) width/2.0f;
-        float y  = -point.y * (float)height + (float)height/2.0f;
+        float x =  point.x * (float)width/2.0f + (float) width/5.0f;
+        float y  = -point.y * (float)height/2.0f + (float)height/5.0f;
         return vector2(x, y);
     }
     void renderer::drawText(vector2 &point) {
         if (point.x >= 0 && point.y >= 0 && point.x < (float) width && point.y < (float) height) {
-            putText((int)point.x, (int)point.y, rgba(2, 2, 1, 255));
+            putText(std::floor(point.x), std::floor(point.y), rgba(105, 225, 215, 45));
         }
     }
     void renderer::render(camera &cam, std::vector<mesh> &meshes) {
         Matrix viewMatrix = Matrix(4,4, 0.0f);
         vector3 up(0.0f, 1.0f, 0.0f);
-        viewMatrix = viewMatrix.lookAt(cam.position,
+        viewMatrix = Matrix::lookAt(cam.position,
                                        cam.target,
                                        up);
         Matrix projectionMatrix = Matrix(4,4,0.0f);
-        projectionMatrix.perspectiveFovRh(0.78f, (float) width/(float)height,
-                                          0.01f, 1.0f);
+        projectionMatrix.perspectiveFovLh(0.78f, (float) width / (float) height,
+                                          0.1f, 1.0f);
         for(const auto& mesh : meshes) {
-            Matrix worldMatrix(4,4, 0.0f);
-            worldMatrix = worldMatrix.rotationYawPitchRoll(mesh.rotation.y, mesh.rotation.x, mesh.rotation.z) * worldMatrix.translation(mesh.position);
-            Matrix transformationMatrix = worldMatrix * viewMatrix;
+            Matrix positionMatrix = Matrix::translation(mesh.position);
+            Matrix rotationMatrix = Matrix::rotationYawPitchRoll(mesh.rotation);
+            Matrix scaleMatrix    = Matrix::scale(mesh.scale);
+            Matrix worldMatrix = positionMatrix * rotationMatrix;
+            Matrix cameraMatrix = viewMatrix * worldMatrix;
+            Matrix transformationMatrix = worldMatrix;
+            transformationMatrix *= viewMatrix;
+            transformationMatrix *= projectionMatrix;
             for(auto& vertex : mesh.vertices) {
                 vector2 point = project(vertex, transformationMatrix);
                 drawText(point);

@@ -138,10 +138,11 @@ void render3D() {
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         renderer.height = w.ws_row;
         renderer.width = w.ws_col;
-        #ifndef NDEBUG
-        renderer.height = 200;
-        renderer.width = 100;
-        #endif
+#ifndef NDEBUG
+        renderer.height = 80;
+        renderer.width = 120;
+#endif
+        renderer.clear(rgba(255,255,255,255));
         renderer.render(cam, meshes);
         renderer.present();
         sleep(2);

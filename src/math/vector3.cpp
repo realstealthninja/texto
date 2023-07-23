@@ -60,8 +60,13 @@ vector3 &vector3::operator*=(const float &n) {
 }
 void vector3::normalize() {
     float length = std::sqrt((x*x) + (y*y) + (z*z));
-    if (length != 0){
-        float inverse = 1.0f / length;
-        *this *= inverse;
-    }
+    x /= length;
+    y /= length;
+    z /= length;
+}
+vector3 vector3::operator-() const {
+    return vector3(-x, -y, -z);
+}
+float vector3::dot(vector3 &v) const {
+    return (x*v.x + y*v.y + z*v.z);
 }

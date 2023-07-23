@@ -25,10 +25,11 @@ namespace textoEngine {
             std::string name;
             vector3 position{};
             vector3 rotation{};
+            vector3 scale{};
             std::vector<vector3> vertices;
             mesh(
                     std::string name,
-                    vector3 position,
+                    const vector3& position,
                     vector3 rotation,
                     std::vector<vector3> vertices
             );

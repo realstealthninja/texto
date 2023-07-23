@@ -117,7 +117,7 @@ void render3D() {
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     textoEngine::renderer renderer(w.ws_col, w.ws_row);
     textoEngine::camera cam(
-            vector3(0,0,-4.0f),
+            vector3(0,0,10.0f),
             vector3(0,0,0)
     );
     textoEngine::mesh mesh("cube");

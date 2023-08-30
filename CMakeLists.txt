@@ -31,3 +31,4 @@ add_executable(
 )
 
 target_link_libraries(texto ${OpenCV_LIBS})
+target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Werror)

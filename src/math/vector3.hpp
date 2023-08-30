@@ -13,7 +13,7 @@ public:
     vector3 operator-() const;
     vector3 &operator-=(const vector3 &v);
     vector3 &operator*= (const vector3 &v);
-
+    vector3 &operator= (const vector3 &v);
     vector3 &operator*= (const float &n);
 
     float &operator[](int i);

@@ -58,7 +58,7 @@ namespace textoEngine {
         }
     }
     void renderer::present() {
-        system("clear");
+        static_cast<void>(system("clear"));
         for (int i{0}; i < height; i++) {
             for (int j{0}; j < width; j++){
                 std::cout << buffer.at(i).at(j);

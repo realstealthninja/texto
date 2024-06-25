@@ -5,10 +5,6 @@
 
 #include <string>
 #include <vector>
-#include <opencv2/core.hpp>
-
-using namespace std;
-using namespace cv;
 
 enum EncodeType {
     GSCALE = 0,

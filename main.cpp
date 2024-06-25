@@ -2,8 +2,8 @@
 #include "src/render.hpp"
 #include <iostream>
 #include <regex>
+#include <cstring>
 
-using namespace std;
 
 regex RE_IMAGE("(.*\\.(jpe?g|png|bmp)$)");
 
@@ -25,12 +25,12 @@ int main(int argc, char** argv) {
     int selection;
     int type;
     std::string path;
-    cout << menu;
-    cin >> selection;
-    cout << "Path?: ";
-    cin >> path;
-    cout << encoding;
-    cin >> type;
+    std::cout << menu;
+    std::cin >> selection;
+    std::cout << "Path?: ";
+    std::cin >> path;
+    std::cout << encoding;
+    std::cin >> type;
 
     switch (selection) {
         case 0:

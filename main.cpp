@@ -5,7 +5,7 @@
 #include <cstring>
 
 
-regex RE_IMAGE("(.*\\.(jpe?g|png|bmp)$)");
+std::regex RE_IMAGE("(.*\\.(jpe?g|png|bmp)$)");
 
 int main(int argc, char** argv) {
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
         case 2:
             render3D();
         default:
-            cout << "please pick either 0 or 1 ";
+            std::cout << "please pick either 0 or 1 ";
             break;
     }
 

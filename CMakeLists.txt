@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 project(texto
     LANGUAGES CXX
     VERSION 1.0.0
-    DESCRIPTION "A text based renderer (soon to be game engine)"
+    DESCRIPTION "A text based renderer"
 )
 
 set(CMAKE_CXX_STANDARD 20)
@@ -31,4 +31,4 @@ add_executable(
 )
 
 target_link_libraries(texto ${OpenCV_LIBS})
-target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Werror)
+target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Wno-error)

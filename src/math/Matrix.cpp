@@ -4,9 +4,9 @@
 #include <complex>
 
 
-Matrix::Matrix(unsigned int _rows, unsigned int _cols, float t) {
+Matrix::Matrix(std::size_t _rows, size_t _cols, float t) {
     matrix.resize(_rows);
-    for (unsigned i{0}; i < matrix.size(); i++) {
+    for (std::size_t i{0}; i < matrix.size(); i++) {
         matrix[i].resize(_cols, t);
     }
     rows = _rows;
@@ -24,15 +24,15 @@ Matrix::Matrix(const Matrix &_matrix) {
 Matrix &Matrix::operator=(const Matrix &_matrix) {
     if (&_matrix == this) return *this;
 
-    unsigned newRows = _matrix.getRows();
-    unsigned newCols = _matrix.getCols();
+    std::size_t newRows = _matrix.getRows();
+    std::size_t newCols = _matrix.getCols();
 
     matrix.resize(newRows);
-    for (unsigned i{0}; i < matrix.size(); i++)
+    for (std::size_t i{0}; i < matrix.size(); i++)
         matrix[i].resize(newCols);
 
-    for (unsigned i{0}; i < newCols; i++){
-        for (unsigned j{0}; j < newRows; j++)
+    for (std::size_t i{0}; i < newCols; i++){
+        for (std::size_t j{0}; j < newRows; j++)
             matrix[i][j] = _matrix.matrix[i][j];
     }
 
@@ -49,8 +49,8 @@ Matrix Matrix::operator+(const Matrix &_matrix) {
 
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i{0}; i < rows; i++)
-        for (unsigned j{0}; j < cols; j++)
+    for (std::size_t i{0}; i < rows; i++)
+        for (std::size_t j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] + _matrix(i,j);
 
     return result;
@@ -61,8 +61,8 @@ Matrix &Matrix::operator+=(const Matrix &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
-    for (unsigned i{0}; i < _matrix.getRows(); i++)
-        for (unsigned j{0}; j < _matrix.getCols(); j++)
+    for (std::size_t i{0}; i < _matrix.getRows(); i++)
+        for (std::size_t j{0}; j < _matrix.getCols(); j++)
             this->matrix[i][j] += _matrix(i,j);
 
     return *this;
@@ -75,8 +75,8 @@ Matrix Matrix::operator-(const Matrix &_matrix) {
 
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i{0}; i < rows; i++)
-        for (unsigned j{0}; j < cols; j++)
+    for (std::size_t i{0}; i < rows; i++)
+        for (std::size_t j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] - _matrix(i,j);
 
     return result;
@@ -87,8 +87,8 @@ Matrix &Matrix::operator-=(const Matrix &_matrix) {
     assert(_matrix.cols == cols);
     assert(_matrix.rows == rows);
 
-    for (unsigned i{0}; i < _matrix.getRows(); i++)
-        for (unsigned j{0}; j < _matrix.getCols(); j++)
+    for (std::size_t i{0}; i < _matrix.getRows(); i++)
+        for (std::size_t j{0}; j < _matrix.getCols(); j++)
             this->matrix[i][j] -= _matrix(i,j);
 
     return *this;
@@ -96,11 +96,13 @@ Matrix &Matrix::operator-=(const Matrix &_matrix) {
 
 
 Matrix Matrix::operator*(const Matrix &_matrix) {
+    assert(this->getCols() == _matrix.getRows());
+
     Matrix result(_matrix.getRows(), _matrix.getCols(), 0.0);
 
-    for(unsigned i{0}; i < _matrix.getRows(); i++)
-        for(unsigned j{0}; j < _matrix.getCols(); j++)
-            for (unsigned k{0}; k < _matrix.getRows(); k++)
+    for(std::size_t i{0}; i < _matrix.getRows(); i++)
+        for(std::size_t j{0}; j < _matrix.getCols(); j++)
+            for (std::size_t k{0}; k < _matrix.getRows(); k++)
                 result.matrix[i][j] += this->matrix[i][k] * _matrix.matrix[i][k];
 
     return result;
@@ -117,8 +119,8 @@ Matrix &Matrix::operator*=(const Matrix &_matrix) {
 Matrix Matrix::transpose() {
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i=0; i<rows; i++) {
-        for (unsigned j=0; j<cols; j++) {
+    for (std::size_t i=0; i<rows; i++) {
+        for (std::size_t j=0; j<cols; j++) {
             result(i,j) = this->matrix[j][i];
         }
     }
@@ -130,8 +132,8 @@ Matrix Matrix::transpose() {
 Matrix Matrix::operator+(float num) {
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i{0}; i < rows; i++)
-        for (unsigned j{0}; j < cols; j++)
+    for (std::size_t i{0}; i < rows; i++)
+        for (std::size_t j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] + num;
     return result;
 }
@@ -140,8 +142,8 @@ Matrix Matrix::operator+(float num) {
 Matrix Matrix::operator-(float num) {
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i{0}; i < rows; i++)
-        for (unsigned j{0}; j < cols; j++)
+    for (std::size_t i{0}; i < rows; i++)
+        for (std::size_t j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] - num;
     return result;
 }
@@ -150,8 +152,8 @@ Matrix Matrix::operator-(float num) {
 Matrix Matrix::operator*(float num) {
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i{0}; i < rows; i++)
-        for (unsigned j{0}; j < cols; j++)
+    for (std::size_t i{0}; i < rows; i++)
+        for (std::size_t j{0}; j < cols; j++)
             result.matrix[i][j] = this->matrix.at(i).at(j) * num;
     return result;
 }
@@ -160,8 +162,8 @@ Matrix Matrix::operator*(float num) {
 Matrix Matrix::operator/(float num) {
     Matrix result(rows, cols, 0.0);
 
-    for (unsigned i{0}; i < rows; i++)
-        for (unsigned j{0}; j < cols; j++)
+    for (std::size_t i{0}; i < rows; i++)
+        for (std::size_t j{0}; j < cols; j++)
             result(i,j) = this->matrix[i][j] / num;
     return result;
 }
@@ -170,8 +172,8 @@ Matrix Matrix::operator/(float num) {
 std::vector<float> Matrix::operator*(const std::vector<float> &vector) {
     std::vector<float> result(vector.size(), 0.0);
 
-    for (unsigned i=0; i<rows; i++)
-        for (unsigned j=0; j<cols; j++)
+    for (std::size_t i=0; i<rows; i++)
+        for (std::size_t j=0; j<cols; j++)
             result[i] = this->matrix[i][j] * vector[j];
 
     return result;
@@ -181,7 +183,7 @@ std::vector<float> Matrix::operator*(const std::vector<float> &vector) {
 [[maybe_unused]] std::vector<float> Matrix::diagonalVector() {
     std::vector<float> result(rows, 0.0);
 
-    for (unsigned i=0; i<rows; i++) {
+    for (std::size_t i=0; i < rows; i++) {
         result[i] = this->matrix[i][i];
     }
 
@@ -189,22 +191,22 @@ std::vector<float> Matrix::operator*(const std::vector<float> &vector) {
 }
 
 
-float &Matrix::operator()(const unsigned int &row, const unsigned int &col) {
+float &Matrix::operator()(const std::size_t &row, const std::size_t &col) {
     return this->matrix[row-1][col-1];
 }
 
 
-const float &Matrix::operator()(const unsigned int &row, const unsigned int &col) const {
+const float &Matrix::operator()(const std::size_t &row, const std::size_t &col) const {
     return this->matrix[row-1][col-1];
 }
 
 
-unsigned Matrix::getRows() const {
+std::size_t Matrix::getRows() const {
     return this->rows;
 }
 
 
-unsigned Matrix::getCols() const {
+std::size_t Matrix::getCols() const {
     return this->cols;
 }
 

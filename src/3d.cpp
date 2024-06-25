@@ -3,6 +3,8 @@
 #include "scales.hpp"
 #include <opencv2/opencv.hpp>
 #include <string>
+#include <iostream>
+#include <cmath>
 #include <thread>
 #include <utility>
 #include <vector>

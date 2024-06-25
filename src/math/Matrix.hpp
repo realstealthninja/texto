@@ -10,10 +10,10 @@
 class Matrix {
 private:
     std::vector<std::vector<float> > matrix;
-    unsigned rows{};
-    unsigned cols{};
+    std::size_t rows{};
+    std::size_t cols{};
 public:
-    Matrix(unsigned _rows, unsigned _cols, float t);
+    Matrix(std::size_t _rows, std::size_t _cols, float t);
     Matrix(const Matrix& _matrix);
     Matrix(const vector3& top,const vector3& middle,const vector3& bottom);
 
@@ -37,11 +37,15 @@ public:
     std::vector<float> operator*(const std::vector<float>& vector);
     [[maybe_unused]] std::vector<float> diagonalVector();
 
-    float& operator()(const unsigned& row, const unsigned& col);
-    const float& operator()(const unsigned& row, const unsigned& col) const;
+    /**
+     * @brief value at (x, y)
+     * @note REMEMBER USES a11 to refer to first element [0][0]
+     */
+    float& operator()(const std::size_t& row, const std::size_t& col);
+    const float& operator()(const std::size_t& row, const std::size_t& col) const;
 
-    [[nodiscard]] unsigned getRows() const;
-    [[nodiscard]] unsigned getCols() const;
+    [[nodiscard]] std::size_t getRows() const;
+    [[nodiscard]] std::size_t getCols() const;
 
     static Matrix lookAt(vector3 &eye, vector3 &target, vector3 &up) ;
     void perspectiveFovLh(float fov, float aspect, float zNear, float zFar);

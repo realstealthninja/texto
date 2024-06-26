@@ -133,7 +133,9 @@ void render3D() {
     mesh.position = vector3(0,0,0);
     std::vector<textoEngine::mesh> meshes;
     meshes.push_back(mesh);
-    renderer.clear(rgba(0,0,0,0));
+
+    struct rgba black = {0, 0, 0, 0};
+    renderer.clear(black);
     while(true) {
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         renderer.height = w.ws_row;
@@ -142,7 +144,8 @@ void render3D() {
         renderer.height = 80;
         renderer.width = 120;
 #endif
-        renderer.clear(rgba(255,255,255,255));
+        struct rgba white = {255, 255, 255, 255};
+        renderer.clear(white);
         renderer.render(cam, meshes);
         renderer.present();
         mesh.rotation = vector3(mesh.rotation.x + 0.01f, mesh.rotation.y, mesh.rotation.z);

@@ -82,8 +82,9 @@ namespace textoEngine {
         return vector2(x, y);
     }
     void renderer::drawText(vector2 &point) {
+        rgba yellow = {105, 225, 215, 45};
         if (point.x >= 0 && point.y >= 0 && point.x < (float) width && point.y < (float) height) {
-            putText(std::floor(point.x), std::floor(point.y), rgba(105, 225, 215, 45));
+            putText(std::floor(point.x), std::floor(point.y), yellow);
         }
     }
     void renderer::render(camera &cam, std::vector<mesh> &meshes) {

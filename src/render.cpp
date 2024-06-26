@@ -115,22 +115,27 @@ void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
 void render3D() {
 
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    
     textoEngine::renderer renderer(w.ws_col, w.ws_row);
     textoEngine::camera cam(
             vector3(0,0,10.0f),
             vector3(0,0,0)
     );
+    
     textoEngine::mesh mesh("cube");
-    mesh.vertices.emplace_back(-1,1,1);
-    mesh.vertices.emplace_back(1,1,1);
-    mesh.vertices.emplace_back(-1,-1,1);
-    mesh.vertices.emplace_back(-1,-1,-1);
-    mesh.vertices.emplace_back(-1,1,-1);
-    mesh.vertices.emplace_back(1,1,-1);
-    mesh.vertices.emplace_back(1,-1,1);
-    mesh.vertices.emplace_back(1,-1,-1);
+    
+    mesh.vertices.emplace_back(-1,  1,  1);
+    mesh.vertices.emplace_back( 1,  1,  1);
+    mesh.vertices.emplace_back(-1, -1,  1);
+    mesh.vertices.emplace_back(-1, -1, -1);
+    mesh.vertices.emplace_back(-1,  1, -1);
+    mesh.vertices.emplace_back( 1,  1, -1);
+    mesh.vertices.emplace_back( 1, -1,  1);
+    mesh.vertices.emplace_back( 1, -1, -1);
+
     mesh.scale = vector3(1,1,1);
     mesh.position = vector3(0,0,0);
+    
     std::vector<textoEngine::mesh> meshes;
     meshes.push_back(mesh);
 

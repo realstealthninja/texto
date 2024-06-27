@@ -1,13 +1,18 @@
-#include "3d.hpp"
-#include "math/Matrix.hpp"
-#include "scales.hpp"
-#include <opencv2/opencv.hpp>
 #include <string>
 #include <iostream>
 #include <cmath>
 #include <thread>
 #include <utility>
 #include <vector>
+#include <opencv2/opencv.hpp>
+
+// math lib
+#include <matrix.hpp>
+
+#include "3d.hpp"
+#include "scales.hpp"
+
+
 
 namespace textoEngine {
     // CAMERA
@@ -42,7 +47,7 @@ namespace textoEngine {
         this->height = height;
         this->buffer = std::vector<std::vector<std::string> > {};
     }
-    void renderer::clear(rgba colour) {
+    void renderer::clear(color colour) {
         for (int i{0}; i < height; i++) {
             std::vector<std::string> line;
             for (int j{0}; j < width; j++) {
@@ -67,7 +72,7 @@ namespace textoEngine {
         }
         std::this_thread::sleep_for(std::chrono::milliseconds((int)1000/60));
     }
-    void renderer::putText(int x, int y, rgba colour) {
+    void renderer::putText(int x, int y, color colour) {
         buffer[x][y].assign(cv::format(
                 "\033[48;2;%i;%i;%im%c\033[0m",
                 colour.r,
@@ -82,7 +87,7 @@ namespace textoEngine {
         return vector2(x, y);
     }
     void renderer::drawText(vector2 &point) {
-        rgba yellow = {105, 225, 215, 45};
+        color yellow = {105, 225, 215, 45};
         if (point.x >= 0 && point.y >= 0 && point.x < (float) width && point.y < (float) height) {
             putText(std::floor(point.x), std::floor(point.y), yellow);
         }

@@ -1,8 +1,7 @@
-#include "render.hpp"
-#include "scales.hpp"
-#include "3d.hpp"
+
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <string>
 #include <thread>
 #ifdef __WIN32
 #include <winsock2.h>
@@ -12,15 +11,44 @@
 #endif
 #include <vector>
 
-using namespace cv;
-using namespace std;
+#include <vector2.hpp>
+#include <vector4.hpp>
 
+#include "render.h"
+#include "scales.hpp"
+#include "3d.hpp"
+
+
+void Renderer::show() {
+    system("clear");
+    for (const std::string& line : art) {
+        std::cout << line << "\n";
+    }
+}
+
+EncodeType Renderer::get_type() {
+    return this->type;
+}
+
+std::string& Renderer::get_path() {
+    return this->path;
+}
+
+void Renderer::set_art(std::vector<std::string> arr) {
+    this-> art = arr;
+}
+
+void Renderer::set_type(EncodeType type) {
+    this->type = type;
+}
+
+Renderer::~Renderer() = default;
 
 struct winsize w{};
 
-vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE) {
-    vector<string> lines;
-    Mat colors[3];
+std::vector<std::string> array_to_ascii(cv::Mat& material, EncodeType encodeType) {
+    std::vector<std::string> lines;
+    cv::Mat colors[3];
     std::string scale;
 
     switch (encodeType){
@@ -28,8 +56,8 @@ vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE
             scale = constants::grayscale;
             break;
         case RGB:
-            split(material, colors);
-            cvtColor(material, material, COLOR_BGR2GRAY);
+            cv::split(material, colors);
+            cv::cvtColor(material, material, cv::COLOR_BGR2GRAY);
             scale = constants::grayscale;
             break;
         case SHORT_GSCALE:
@@ -40,7 +68,7 @@ vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE
     }
 
     for (int i{0}; i < material.rows; i++) {
-        string line;
+        std::string line;
         for (int j{0}; j < material.cols; j++) {
             int pixel = (int)material.at<uchar>(i,j);
             if (encodeType != GSCALE){
@@ -62,34 +90,34 @@ vector<string> convertMatIntoArray(Mat &material, EncodeType encodeType = GSCALE
 }
 
 
-void write(const vector<string>& input) {
+void write(const std::vector<std::string>& input) {
     system("clear");
-    for(const string& value : input){
-        cout << value << "\n";
+    for(const std::string& value : input){
+        std::cout << value << "\n";
     }
 }
 
-void renderImage(const char* path, EncodeType encodeType = GSCALE){
-    Mat image = imread(path);
+void render_image(const char* path, EncodeType encodeType = GSCALE){
+    cv::Mat image = cv::imread(path);
 
     if (image.empty()){
-        cout << "couldn't read image";
+        std::cout << "couldn't read image";
         exit(-1);
     }
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    resize(image, image, Size((int) w.ws_col, (int) w.ws_row), INTER_LINEAR);
+    cv::resize(image, image, cv::Size((int) w.ws_col, (int) w.ws_row), cv::INTER_LINEAR);
 
     if(encodeType == GSCALE)
-        cvtColor(image, image, COLOR_BGR2GRAY);
-    vector<string> imageChar = convertMatIntoArray(image, encodeType);
+        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
+    std::vector<std::string> imageChar = array_to_ascii(image, encodeType);
     write(imageChar);
 }
 
-void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
-    Mat frame;
-    VideoCapture video(path);
+void render_video(const char* path, EncodeType encodeType = EncodeType::GSCALE) {
+    cv::Mat frame;
+    cv::VideoCapture video(path);
 
-    double fps = video.get(CAP_PROP_FPS);
+    double fps = video.get(cv::CAP_PROP_FPS);
     double displayRate = 1000/fps;
 
 
@@ -99,20 +127,20 @@ void renderVideo(const char* path, EncodeType encodeType = GSCALE) {
 
         if (frame.empty()) break;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-        resize(frame, frame, Size((int) w.ws_col, (int)w.ws_row), INTER_LINEAR);
+        resize(frame, frame, cv::Size((int) w.ws_col, (int)w.ws_row), cv::INTER_LINEAR);
         if(encodeType == GSCALE)
-            cvtColor(frame, frame, COLOR_BGR2GRAY);
+            cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
 
-        vector<string> imageChar = convertMatIntoArray(frame, encodeType);
+        std::vector<std::string> imageChar = array_to_ascii(frame, encodeType);
 
         write(imageChar);
-        this_thread::sleep_for(chrono::milliseconds((int)displayRate));
+        std::this_thread::sleep_for(std::chrono::milliseconds((int)displayRate));
     }
 
     video.release();
 }
 
-void render3D() {
+void render_3d() {
 
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     
@@ -139,7 +167,7 @@ void render3D() {
     std::vector<textoEngine::mesh> meshes;
     meshes.push_back(mesh);
 
-    struct rgba black = {0, 0, 0, 0};
+    struct color black = {0, 0, 0, 0};
     renderer.clear(black);
     while(true) {
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -149,7 +177,7 @@ void render3D() {
         renderer.height = 80;
         renderer.width = 120;
 #endif
-        struct rgba white = {255, 255, 255, 255};
+        struct color white = {255, 255, 255, 255};
         renderer.clear(white);
         renderer.render(cam, meshes);
         renderer.present();

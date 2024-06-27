@@ -6,29 +6,26 @@ project(texto
 )
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 find_package(OpenCV REQUIRED)
+
 add_executable(
         texto
         main.cpp
-        src/main.hpp
-        src/render.hpp
         src/render.cpp
-        src/scales.hpp
         src/3d.cpp
-        src/3d.hpp
-        src/math/Matrix.cpp
-        src/math/Matrix.hpp
-        src/math/vector2.cpp
-        src/math/vector2.hpp
-        src/math/vector3.cpp
-        src/math/vector3.hpp
-        src/math/vector4.cpp
-        src/math/vector4.hpp
-        src/rgba.hpp
+        src/image.cpp
         src/scales.cpp
 )
 
-target_link_libraries(texto ${OpenCV_LIBS})
+target_include_directories(texto PRIVATE includes/)
+
+include_directories(".")
+
+# add math dir
+add_subdirectory(math)
+
+target_link_libraries(texto ${OpenCV_LIBS} math)
 target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Wno-error)

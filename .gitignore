@@ -1,6 +1,8 @@
-# CMakeLists
-/cmake-build-debug/
-/cmake-build-release/
+# Builds
+build/
+
+# clangd
+.cache/
 
 # IDE
 /.vscode/

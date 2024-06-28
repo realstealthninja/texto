@@ -33,14 +33,17 @@ class Renderer {
     std::vector<std::string> art;
 
     virtual void render() = 0;
+
     
     public:
+    void output();
     void show();
 
     EncodeType get_type();
     std::string& get_path();
     void set_art(std::vector<std::string> arr);
     void set_type(EncodeType type);
+    std::vector<std::string> get_art();
 
     Renderer(const std::string& path, EncodeType type) : path(path), type(type) {};
     ~Renderer();

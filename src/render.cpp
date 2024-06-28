@@ -18,12 +18,15 @@
 #include "scales.hpp"
 #include "3d.hpp"
 
-
-void Renderer::show() {
+void Renderer::output() {
     system("clear");
     for (const std::string& line : art) {
         std::cout << line << "\n";
     }
+}
+void Renderer::show() {
+    render();
+    output();
 }
 
 EncodeType Renderer::get_type() {
@@ -36,6 +39,10 @@ std::string& Renderer::get_path() {
 
 void Renderer::set_art(std::vector<std::string> arr) {
     this-> art = arr;
+}
+
+std::vector<std::string> Renderer::get_art() {
+    return this-> art;
 }
 
 void Renderer::set_type(EncodeType type) {
@@ -71,15 +78,17 @@ std::vector<std::string> array_to_ascii(cv::Mat& material, EncodeType encodeType
         std::string line;
         for (int j{0}; j < material.cols; j++) {
             int pixel = (int)material.at<uchar>(i,j);
-            if (encodeType != GSCALE){
+            if (encodeType == RGB){
+                int red = static_cast<int> (colors[2].at<uchar>(i,j));
+                int green = static_cast<int> (colors[1].at<uchar>(i,j));
+                int blue = static_cast<int> (colors[0].at<uchar>(i,j));
                 // [38 for foreground and 48 for background
                 // shouts out to Leonhard Euler for doing math
                 line += cv::format(
-                        "\033[48;2;%i;%i;%im%c\033[0m",
-                        (int)colors[2].at<uchar>(i,j),
-                        (int)colors[1].at<uchar>(i,j),
-                        (int)colors[0].at<uchar>(i,j),
-                        constants::grayscale[pixel % constants::grayscale.length()]);
+                        "\033[48;2;%i;%i;%im\033[38;2;%i;%i;%im%c\033[0m",
+                        red,green, blue, // background
+                        red, green, blue, // foreground
+                        scale[pixel % scale.length()]);
             } else {
                 line += scale[pixel % scale.length()];
             }
@@ -95,22 +104,6 @@ void write(const std::vector<std::string>& input) {
     for(const std::string& value : input){
         std::cout << value << "\n";
     }
-}
-
-void render_image(const char* path, EncodeType encodeType = GSCALE){
-    cv::Mat image = cv::imread(path);
-
-    if (image.empty()){
-        std::cout << "couldn't read image";
-        exit(-1);
-    }
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    cv::resize(image, image, cv::Size((int) w.ws_col, (int) w.ws_row), cv::INTER_LINEAR);
-
-    if(encodeType == GSCALE)
-        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
-    std::vector<std::string> imageChar = array_to_ascii(image, encodeType);
-    write(imageChar);
 }
 
 void render_video(const char* path, EncodeType encodeType = EncodeType::GSCALE) {

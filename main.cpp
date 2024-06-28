@@ -4,6 +4,7 @@
 
 #include "image.h"
 #include "render.h"
+#include "video.h"
 
 std::string menu = "############################\n"
                    "#                          #\n"
@@ -27,7 +28,6 @@ std::string encoding = "############################\n"
 std::regex RE_IMAGE("(.*\\.(jpe?g|png|bmp)$)");
 
 int main(int argc, char** argv) {
-    Renderer* renderer; 
 
     EncodeType encodeType = GSCALE;
     if (argc == 3) {
@@ -36,11 +36,10 @@ int main(int argc, char** argv) {
 
         if (regex_match(argv[1], RE_IMAGE)) {
             Image image(argv[1], encodeType);
-            renderer = &image;
+            image.show();
+        } else {
+           Video video(argv[1], encodeType);
         }
-    //    else
-    //         renderVideo(argv[1], encodeType);
-
         return 0;
     }
 
@@ -57,9 +56,11 @@ int main(int argc, char** argv) {
 
     if (selection == 0) {
         Image image(path, static_cast<EncodeType>(type));
-        renderer = &image;
+        image.show();
+    } else if (selection == 1) {
+        Video video(path, static_cast<EncodeType>(type));
+        video.show();
     }
-    renderer->show();
 
     return 0;
 }

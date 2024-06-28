@@ -1,4 +1,5 @@
-#include "scales.hpp"
+#include "scales.h"
+
 namespace constants {
     extern const std::string shortGrayscale  = " .:-=+*#%@";
     extern const std::string grayscale = " .'`^\",:;Il!i><~+_-?][}{1)(|/\\tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";

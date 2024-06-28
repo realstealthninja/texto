@@ -1,8 +1,8 @@
 #include <cassert>
 #include <cmath>
 
-#include "matrix.hpp"
-#include "vector4.hpp"
+#include "matrix.h"
+#include "vector4.h"
 
 
 Matrix::Matrix(std::size_t _rows, size_t _cols, float t) {

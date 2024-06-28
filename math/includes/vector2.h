@@ -1,5 +1,5 @@
-#ifndef TEXTO_VECTOR2_HPP
-#define TEXTO_VECTOR2_HPP
+#ifndef TEXTO_VECTOR2_H
+#define TEXTO_VECTOR2_H
 
 
 class vector2 {
@@ -17,4 +17,4 @@ class vector2 {
         float &operator[](int i);
 };
 
-#endif //TEXTO_VECTOR2_HPP
+#endif //TEXTO_VECTOR2_H

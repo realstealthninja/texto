@@ -1,5 +1,5 @@
-#ifndef TEXTO_VECTOR3_HPP
-#define TEXTO_VECTOR3_HPP
+#ifndef TEXTO_VECTOR3_H
+#define TEXTO_VECTOR3_H
 
 class vector3 {
 public:
@@ -24,4 +24,4 @@ public:
     void normalize();
 };
 
-#endif//TEXTO_VECTOR3_HPP
+#endif//TEXTO_VECTOR3_H

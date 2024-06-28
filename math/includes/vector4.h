@@ -1,8 +1,8 @@
-#ifndef TEXTO_VECTOR4_HPP
-#define TEXTO_VECTOR4_HPP
+#ifndef TEXTO_VECTOR4_H
+#define TEXTO_VECTOR4_H
 
 
-#include "vector3.hpp"
+#include "vector3.h"
 
 class vector4 {
 public:
@@ -15,4 +15,4 @@ public:
 };
 
 
-#endif//TEXTO_VECTOR4_HPP
+#endif//TEXTO_VECTOR4_H

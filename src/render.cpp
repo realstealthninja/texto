@@ -11,12 +11,12 @@
 #endif
 #include <vector>
 
-#include <vector2.hpp>
-#include <vector4.hpp>
+#include <vector2.h>
+#include <vector4.h>
 
 #include "render.h"
-#include "scales.hpp"
-#include "3d.hpp"
+#include "scales.h"
+#include "3d.h"
 
 void Renderer::output() {
     system("clear");

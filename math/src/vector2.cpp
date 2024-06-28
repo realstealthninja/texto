@@ -1,4 +1,4 @@
-#include "vector2.hpp"
+#include "vector2.h"
 #include <cassert>
 
 vector2::vector2(float x, float y) : x(x), y(y) {};

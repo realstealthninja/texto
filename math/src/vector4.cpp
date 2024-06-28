@@ -1,5 +1,7 @@
-#include "vector4.hpp"
-#include <complex>
+#include <cmath>
+
+#include "vector4.h"
+
 
 vector4 vector4::toRotationAxis(vector3 axis, float angle) {
     axis.normalize();

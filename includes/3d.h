@@ -1,12 +1,12 @@
-#ifndef TEXTO_3D_HPP
-#define TEXTO_3D_HPP
+#ifndef TEXTO_3D_H
+#define TEXTO_3D_H
 
 #include <string>
 
-#include <matrix.hpp>
-#include <vector2.hpp>
-#include <vector3.hpp>
-#include "rgba.hpp"
+#include <matrix.h>
+#include <vector2.h>
+#include <vector3.h>
+#include "rgba.h"
 
 namespace textoEngine {
     class camera {
@@ -54,4 +54,4 @@ namespace textoEngine {
     };
 }
 
-#endif //TEXTO_3D_HPP
+#endif //TEXTO_3D_H

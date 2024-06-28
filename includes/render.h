@@ -1,12 +1,12 @@
-#ifndef TEXTO_RENDER_HPP
-#define TEXTO_RENDER_HPP
+#ifndef TEXTO_RENDER_H
+#define TEXTO_RENDER_H
 
 #include <opencv2/core.hpp>
 #include <string>
 #include <vector>
 
-#include <vector2.hpp>
-#include <vector4.hpp>
+#include <vector2.h>
+#include <vector4.h>
 
 
 enum EncodeType {
@@ -50,4 +50,4 @@ class Renderer {
 };
 
 
-#endif //TEXTO_RENDER_HPP
+#endif //TEXTO_RENDER_H

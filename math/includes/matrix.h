@@ -1,9 +1,9 @@
-#ifndef TEXTO_MATRIX_HPP
-#define TEXTO_MATRIX_HPP
+#ifndef TEXTO_MATRIX_H
+#define TEXTO_MATRIX_H
 
-#include "vector3.hpp"
-#include "vector4.hpp"
+
 #include <vector>
+#include "vector3.h"
 
 // this implementation of the Matrix was stolen from https://www.quantstart.com/articles/Matrix-Classes-in-C-The-Header-File/
 
@@ -60,4 +60,4 @@ public:
     [[nodiscard]] vector3 transformCoordinate(const vector3& v) const;
 };
 
-#endif //TEXTO_MATRIX_HPP
+#endif //TEXTO_MATRIX_H

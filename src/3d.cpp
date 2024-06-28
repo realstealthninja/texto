@@ -7,10 +7,10 @@
 #include <opencv2/opencv.hpp>
 
 // math lib
-#include <matrix.hpp>
+#include <matrix.h>
 
-#include "3d.hpp"
-#include "scales.hpp"
+#include "3d.h"
+#include "scales.h"
 
 
 

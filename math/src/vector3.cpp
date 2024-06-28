@@ -1,6 +1,6 @@
-#include "vector3.hpp"
 #include <cassert>
 #include <cmath>
+#include "vector3.h"
 
 vector3::vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 vector3::vector3(const vector3 &vector) {

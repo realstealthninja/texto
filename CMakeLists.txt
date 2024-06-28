@@ -17,6 +17,7 @@ add_executable(
         src/render.cpp
         src/3d.cpp
         src/image.cpp
+        src/video.cpp
         src/scales.cpp
 )
 

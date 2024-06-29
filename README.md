@@ -20,6 +20,7 @@ Your one-stop shop for all things related to ascii.
 ![Last commit](https://img.shields.io/github/last-commit/realstealthninja/texto?style=flat-square)
 ![Repository size](https://img.shields.io/github/repo-size/realstealthninja/texto?style=flat-square)
 ![build](https://img.shields.io/github/actions/workflow/status/realstealthninja/texto/build-project.yml?style=flat-square&logo=github)
+[![Code Scanning](https://github.com/realstealthninja/texto/actions/workflows/codeql.yml/badge.svg)](https://github.com/realstealthninja/texto/actions/workflows/codeql.yml)
 
 </div>
 

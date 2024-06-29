@@ -6,22 +6,23 @@
 #include "render.h"
 #include "video.h"
 
-std::string menu = "############################\n"
-                   "#                          #\n"
-                   "#      0.Image             #\n"
-                   "#      1.Video             #\n"
-                   "#                          #\n"
-                   "############################\n"
+std::string menu = "┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" 
+                   "┃                          ┃\n"
+                   "┃         0.Image          ┃\n"
+                   "┃         1.Video          ┃\n"
+                   "┃         3.3D             ┃\n"
+                   "┃                          ┃\n"
+                   "┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n"
                    "Input?: ";
                    
-std::string encoding = "############################\n"
-                       "#                          #\n"
-                       "#      0.GRAY SCALE        #\n"
-                       "#      1.RGB               #\n"
-                       "#      2.SHORT GRAY        #\n"
-                       "#      3.REVERSE GRAY      #\n"
-                       "#                          #\n"
-                       "############################\n"
+std::string encoding = "┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n"
+                       "┃                          ┃\n"
+                       "┃      0. GRAY SCALE       ┃\n"
+                       "┃      1. RGB              ┃\n"
+                       "┃      2. SHORT GRAY       ┃\n"
+                       "┃      3. REVERSE GRAY     ┃\n"
+                       "┃                          ┃\n"
+                       "┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n"
                        "Input?: ";
 
 

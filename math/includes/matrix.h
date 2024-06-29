@@ -17,13 +17,12 @@ public:
     Matrix(const Matrix& _matrix);
     Matrix(const vector3& top,const vector3& middle,const vector3& bottom);
 
-    Matrix& operator= (const Matrix& _matrix);
-
-    Matrix operator+ (const Matrix& _matrix);
-    Matrix& operator+= (const Matrix&matrix);
-    Matrix operator- (const Matrix& _matrix);
+    Matrix& operator=  (const Matrix& _matrix);
+    Matrix  operator+  (const Matrix& _matrix);
+    Matrix& operator+= (const Matrix& matrix);
+    Matrix  operator-  (const Matrix& _matrix);
     Matrix& operator-= (const Matrix& _matrix);
-    Matrix operator* (const Matrix& _matrix);
+    Matrix  operator*  (const Matrix& _matrix);
     Matrix& operator*= (const Matrix& _matrix);
     Matrix transpose();
 

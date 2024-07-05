@@ -16,6 +16,7 @@ public:
     Matrix(std::size_t _rows, std::size_t _cols, float t);
     Matrix(const Matrix& _matrix);
     Matrix(const vector3& top,const vector3& middle,const vector3& bottom);
+    Matrix(const vector3& vec);
 
     Matrix& operator=  (const Matrix& _matrix);
     Matrix  operator+  (const Matrix& _matrix);

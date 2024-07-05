@@ -1,5 +1,4 @@
 
-#include "vector3.h"
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <string>
@@ -18,6 +17,7 @@
 #include "render.h"
 #include "scales.h"
 #include "3d.h"
+#include "vector3.h"
 
 void Renderer::output() {
     system("clear");

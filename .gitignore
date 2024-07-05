@@ -10,3 +10,6 @@ build/
 
 # explicit examples
 /examples/givingup.mp4
+
+
+compile_commands.json

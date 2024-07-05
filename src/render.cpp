@@ -1,4 +1,5 @@
 
+#include "vector3.h"
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <string>
@@ -133,32 +134,21 @@ void render_video(const char* path, EncodeType encodeType = EncodeType::GSCALE) 
     video.release();
 }
 
-void render_3d() {
-
+void render3D() {
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    
     textoEngine::renderer renderer(w.ws_col, w.ws_row);
-    textoEngine::camera cam(
-            vector3(0,0,10.0f),
-            vector3(0,0,0)
-    );
-    
-    textoEngine::mesh mesh("cube");
-    
-    mesh.vertices.emplace_back(-1,  1,  1);
-    mesh.vertices.emplace_back( 1,  1,  1);
-    mesh.vertices.emplace_back(-1, -1,  1);
-    mesh.vertices.emplace_back(-1, -1, -1);
-    mesh.vertices.emplace_back(-1,  1, -1);
-    mesh.vertices.emplace_back( 1,  1, -1);
-    mesh.vertices.emplace_back( 1, -1,  1);
-    mesh.vertices.emplace_back( 1, -1, -1);
 
-    mesh.scale = vector3(1,1,1);
-    mesh.position = vector3(0,0,0);
+    std::vector<vector3> meshes = {
+        vector3(-1, -1, -1),
+        vector3( 1, -1, -1),
+        vector3( 1,  1, -1),
+        vector3(-1,  1, -1),
+        vector3(-1, -1,  1),
+        vector3( 1, -1,  1),
+        vector3( 1,  1,  1),
+        vector3( -1, 1,  1),
+    };
     
-    std::vector<textoEngine::mesh> meshes;
-    meshes.push_back(mesh);
 
     struct color black = {0, 0, 0, 0};
     renderer.clear(black);
@@ -166,14 +156,11 @@ void render_3d() {
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         renderer.height = w.ws_row;
         renderer.width = w.ws_col;
-#ifndef NDEBUG
-        renderer.height = 80;
-        renderer.width = 120;
-#endif
+
         struct color white = {255, 255, 255, 255};
+
         renderer.clear(white);
-        renderer.render(cam, meshes);
+        renderer.render(meshes);
         renderer.present();
-        mesh.rotation = vector3(mesh.rotation.x + 0.01f, mesh.rotation.y, mesh.rotation.z);
     }
 }

@@ -1,20 +1,22 @@
+#include <exception>
 #include <iostream>
 #include <regex>
-#include <cstring>
+
+#include <argparse/argparse.hpp>
 
 #include "image.h"
 #include "render.h"
 #include "video.h"
 
-std::string menu = "┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" 
+std::string menu = "┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n"
                    "┃                          ┃\n"
                    "┃         0.Image          ┃\n"
                    "┃         1.Video          ┃\n"
-                   "┃         3.3D             ┃\n"
+                   "┃         2.3D             ┃\n"
                    "┃                          ┃\n"
                    "┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n"
                    "Input?: ";
-                   
+
 std::string encoding = "┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n"
                        "┃                          ┃\n"
                        "┃      0. GRAY SCALE       ┃\n"
@@ -28,32 +30,69 @@ std::string encoding = "┏━━━━━━━━━━━━━━━━━�
 
 std::regex RE_IMAGE("(.*\\.(jpe?g|png|bmp)$)");
 
-int main(int argc, char** argv) {
 
-    EncodeType encodeType = GSCALE;
-    if (argc == 3) {
-        if (strcmp(argv[2], "GSCALE") != 0)
-            encodeType = RGB;
+int main(int argc, char *argv[]) {
 
-        if (regex_match(argv[1], RE_IMAGE)) {
-            Image image(argv[1], encodeType);
-            image.show();
+    argparse::ArgumentParser program("Texto");
+
+    program.add_argument("-E", "--encode-type").default_value("gscale");
+    program.add_argument("-G", "--Text-ui-mode").implicit_value(true).default_value(false);
+    auto &media = program.add_mutually_exclusive_group();
+    media.add_argument("-V").implicit_value(false);
+    media.add_argument("-I").implicit_value(false);
+    media.add_argument("-D").implicit_value(false);
+
+    program.add_argument("path");   
+
+    try {
+        program.parse_args(argc, argv);
+    } catch (const std::exception &err) {
+        std::cerr << err.what() << std::endl;
+        std::cerr << program;
+        return 1;
+    }
+
+    if (!program.get<bool>("-G")) {
+
+
+        EncodeType encoding_type = GSCALE;
+        auto path = program.get("path");
+        auto encoding_str = program.get("-E");
+
+        if (encoding_str.compare("rgb") == 0) {
+            encoding_type = EncodeType::RGB;
+        } else if (encoding_str.compare("rgscale")) {
+            encoding_type = EncodeType::REVERSE_GSCALE;
+        } else if (encoding_str.compare("sgscale")) {
+            encoding_type = EncodeType::SHORT_GSCALE;
         } else {
-           Video video(argv[1], encodeType);
+            encoding_type = EncodeType::GSCALE;
+        }
+
+        if (program.get<bool>("-I")) {
+            Image image(path, encoding_type);
+            image.show();
+        } else if (program.get<bool>("-V")) {
+            Video video(path, encoding_type);
+            video.show();
+        } else if (program.get<bool>("-D")) {
+            render3D();
         }
         return 0;
     }
 
+
     int selection = 0;
     int type;
     std::string path;
+
     std::cout << menu;
     std::cin >> selection;
-    std::cout << "Path?: ";
+    std::cout << "Path?: \n";
     std::cin >> path;
     std::cout << encoding;
     std::cin >> type;
-    
+
 
     if (selection == 0) {
         Image image(path, static_cast<EncodeType>(type));
@@ -61,6 +100,8 @@ int main(int argc, char** argv) {
     } else if (selection == 1) {
         Video video(path, static_cast<EncodeType>(type));
         video.show();
+    } else if (selection == 2) {
+        render3D();
     }
 
     return 0;

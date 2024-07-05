@@ -21,6 +21,18 @@ Matrix::Matrix(const Matrix &_matrix) {
     cols = _matrix.getCols();
 }
 
+Matrix::Matrix(const vector3& vec) {
+    matrix.resize(3);
+    
+    for (std::size_t i{0}; i < matrix.size(); i++) {
+        matrix[i].resize(1);
+    }
+    matrix[0][0] = vec.x;
+    matrix[1][0] = vec.y;
+    matrix[2][0] = vec.z;
+
+}
+
 
 Matrix &Matrix::operator=(const Matrix &_matrix) {
     if (&_matrix == this) return *this;

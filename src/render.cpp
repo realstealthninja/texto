@@ -139,19 +139,20 @@ void render3D() {
     textoEngine::renderer renderer(w.ws_col, w.ws_row);
 
     std::vector<vector3> meshes = {
-        vector3(-1, -1, -1),
-        vector3( 1, -1, -1),
-        vector3( 1,  1, -1),
-        vector3(-1,  1, -1),
-        vector3(-1, -1,  1),
-        vector3( 1, -1,  1),
-        vector3( 1,  1,  1),
-        vector3( -1, 1,  1),
+        vector3(-0.5, -0.5, -0.5),
+        vector3( 0.5, -0.5, -0.5),
+        vector3( 0.5,  0.5, -0.5),
+        vector3(-0.5,  0.5, -0.5),
+        vector3(-0.5, -0.5,  0.5),
+        vector3( 0.5, -0.5,  0.5),
+        vector3( 0.5,  0.5,  0.5),
+        vector3( -0.5, 0.5,  0.5),
     };
     
 
-    struct color black = {0, 0, 0, 0};
+    struct color black = {0, 0, 0, 255};
     renderer.clear(black);
+    renderer.present();
     while(true) {
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         renderer.height = w.ws_row;

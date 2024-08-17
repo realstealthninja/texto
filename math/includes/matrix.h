@@ -13,8 +13,28 @@ private:
     std::size_t rows{};
     std::size_t cols{};
 public:
+    /**
+     * @brief Constructs a new Matrix object
+     * 
+     * @param _rows number of rows
+     * @param _cols number of columns
+     * @param t float to be filled
+     */
     Matrix(std::size_t _rows, std::size_t _cols, float t);
+
+    /**
+     * @brief Constructs a new Matrix from an old Matrix object
+     * 
+     * @param _matrix 
+     */
     Matrix(const Matrix& _matrix);
+    /**
+     * @brief Construct a new Matrix object from three vector3s
+     * 
+     * @param top top vector corresponds to (1, 1) (1, 2) (1, 3)
+     * @param middle middle vector corresponds to (2, 1) (2, 2) (2, 3)
+     * @param bottom 
+     */
     Matrix(const vector3& top,const vector3& middle,const vector3& bottom);
     Matrix(const vector3& vec);
 
@@ -39,13 +59,33 @@ public:
 
     /**
      * @brief value at (x, y)
-     * @note REMEMBER USES a11 to refer to first element [0][0]
+     * @note REMEMBER USES (1, 1) to refer to first element [0][0]
      */
     float& operator()(const std::size_t& row, const std::size_t& col);
+
+    /**
+     * @brief value at (x, y)
+     * 
+     * @param row 
+     * @param col 
+     * @return const float&
+     */
     const float& operator()(const std::size_t& row, const std::size_t& col) const;
 
+    /**
+     * @brief Gets the number of rows
+     * 
+     * @return std::size_t 
+     */
     [[nodiscard]] std::size_t getRows() const;
+
+    /**
+     * @brief Gets the number of columns
+     * 
+     * @return std::size_t 
+     */
     [[nodiscard]] std::size_t getCols() const;
+
 
     static Matrix lookAt(vector3 &eye, vector3 &target, vector3 &up) ;
     void perspectiveFovLh(float fov, float aspect, float zNear, float zFar);

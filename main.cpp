@@ -37,12 +37,12 @@ int main(int argc, char *argv[]) {
 
     program.add_argument("-E", "--encode-type").default_value("gscale");
     program.add_argument("-G", "--Text-ui-mode").implicit_value(true).default_value(false);
-    auto &media = program.add_mutually_exclusive_group();
-    media.add_argument("-V").implicit_value(false);
-    media.add_argument("-I").implicit_value(false);
-    media.add_argument("-D").implicit_value(false);
+    auto &media = program.add_mutually_exclusive_group(true);
+    media.add_argument("-V").flag();
+    media.add_argument("-I").flag();
+    media.add_argument("-D").flag();
 
-    program.add_argument("path");   
+    program.add_argument("path");
 
     try {
         program.parse_args(argc, argv);

@@ -113,10 +113,10 @@ Matrix Matrix::operator*(const Matrix &_matrix) {
 
     Matrix result(_matrix.getRows(), _matrix.getCols(), 0.0);
 
-    for(std::size_t i{0}; i < _matrix.getRows(); i++)
-        for(std::size_t j{0}; j < _matrix.getCols(); j++)
+    for(std::size_t i{0}; i < this->getRows(); i++)
+        for(std::size_t j{0}; j < this->getCols(); j++)
             for (std::size_t k{0}; k < _matrix.getRows(); k++)
-                result.matrix[i][j] += this->matrix[i][k] * _matrix.matrix[i][k];
+                result.matrix[i][j] += this->matrix[i][k] * _matrix.matrix[k][j];
 
     return result;
 }

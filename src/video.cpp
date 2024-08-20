@@ -32,7 +32,7 @@ void Video::render() {
 
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         
-        cv::resize(frame, frame, cv::Size((int) w.ws_col, (int)w.ws_row), cv::INTER_LINEAR);
+        cv::resize(frame, frame, cv::Size(static_cast<int>(w.ws_col), static_cast<int>(w.ws_row)), cv::INTER_LINEAR);
         
         if(get_type() == GSCALE) {
             cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
@@ -41,7 +41,7 @@ void Video::render() {
         set_art(array_to_ascii(frame, get_type()));
         output();
         
-        std::this_thread::sleep_for(std::chrono::milliseconds((int)display_rate));
+        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(display_rate)));
     }
 
     video.release();

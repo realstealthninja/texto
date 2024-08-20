@@ -78,7 +78,7 @@ std::vector<std::string> array_to_ascii(cv::Mat& material, EncodeType encodeType
     for (int i{0}; i < material.rows; i++) {
         std::string line;
         for (int j{0}; j < material.cols; j++) {
-            int pixel = (int)material.at<uchar>(i,j);
+            int pixel = static_cast<int>(material.at<uchar>(i,j));
             if (encodeType == RGB){
                 int red = static_cast<int> (colors[2].at<uchar>(i,j));
                 int green = static_cast<int> (colors[1].at<uchar>(i,j));
@@ -121,14 +121,14 @@ void render_video(const char* path, EncodeType encodeType = EncodeType::GSCALE) 
 
         if (frame.empty()) break;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-        resize(frame, frame, cv::Size((int) w.ws_col, (int)w.ws_row), cv::INTER_LINEAR);
+        resize(frame, frame, cv::Size(static_cast<int>(w.ws_col), static_cast<int>(w.ws_row)), cv::INTER_LINEAR);
         if(encodeType == GSCALE)
             cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
 
         std::vector<std::string> imageChar = array_to_ascii(frame, encodeType);
 
         write(imageChar);
-        std::this_thread::sleep_for(std::chrono::milliseconds((int)displayRate));
+        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(displayRate)));
     }
 
     video.release();

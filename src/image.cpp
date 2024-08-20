@@ -20,7 +20,7 @@ void Image::render() {
         exit(-1);
     }
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    resize(image, image, cv::Size((int) w.ws_col, (int) w.ws_row), cv::INTER_LINEAR);
+    resize(image, image, cv::Size(static_cast<int>(w.ws_col), static_cast<int>(w.ws_row)), cv::INTER_LINEAR);
 
     if(get_type() == EncodeType::GSCALE)
         cvtColor(image, image, cv::COLOR_BGR2GRAY);

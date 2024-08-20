@@ -1,4 +1,4 @@
 mkdir build &&
 cd build &&
 cmake .. &&
-cmake --build ./cmake-build-release --target texto -j 8 
+cmake --build ./ --target texto -j 8 

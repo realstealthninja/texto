@@ -9,6 +9,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
+add_compile_options(-Wall -Wextra -Wpedantic
+                    -Wconversion -Wcast-align
+                    -Wunused -Wold-style-cast
+                    -Wpointer-arith -Wcast-qual 
+                    -Wno-missing-braces)
+
 find_package(OpenCV REQUIRED)
 
 add_executable(

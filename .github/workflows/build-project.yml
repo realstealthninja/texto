@@ -11,5 +11,5 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get -qq update
-          sudo apt-get -qq install ninja-build libopencv-dev
+          sudo apt-get -qq install libopencv-dev
       - run: ./build.sh

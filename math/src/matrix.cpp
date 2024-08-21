@@ -1,5 +1,6 @@
 #include <cassert>
 #include <cmath>
+#include <cstddef>
 
 #include "matrix.h"
 #include "vector4.h"
@@ -223,13 +224,13 @@ std::size_t Matrix::getCols() const {
     return this->cols;
 }
 
-Matrix Matrix::identity() {
-    Matrix result(4, 4, 0.0f);
+Matrix Matrix::identity(int size) {
+    Matrix result(size, size, 0.0f);
 
-    result.matrix.at(0).at(0) = 1.0f;
-    result.matrix.at(1).at(1) = 1.0f;
-    result.matrix.at(2).at(2) = 1.0f;
-    result.matrix.at(3).at(3) = 1.0f;
+    for(int i{0}; i < size; i++) {
+        result.matrix.at(i).at(i) = 1.0f;
+    }
+
     return result;
 }
 
@@ -266,7 +267,7 @@ void Matrix::perspectiveFovLh(
         this->matrix[3][2] = (zFar * zNear) / depth;
 }
 Matrix Matrix::rotation_pitch(float pitch) {
-    Matrix roo = Matrix::identity();
+    Matrix roo = Matrix::identity(4);
     const float cos = std::cos(pitch);
     const float sin = std::sin(pitch);
     roo.matrix[0][0] = 1.0f;
@@ -279,7 +280,7 @@ Matrix Matrix::rotation_pitch(float pitch) {
 }
 
 Matrix Matrix::rotation_roll(float roll) {
-    Matrix roo = Matrix::identity();
+    Matrix roo = Matrix::identity(4);
     const float cos = std::cos(roll);
     const float sin = std::sin(roll);
     roo.matrix[0][0] = cos;
@@ -292,7 +293,7 @@ Matrix Matrix::rotation_roll(float roll) {
 }
 
 Matrix Matrix::rotation_yaw(float yaw) {
-    Matrix roo = Matrix::identity();
+    Matrix roo = Matrix::identity(4);
     const float cos = std::cos(yaw);
     const float sin = std::sin(yaw);
     roo.matrix[0][0] = cos;
@@ -305,7 +306,7 @@ Matrix Matrix::rotation_yaw(float yaw) {
 }
 
 Matrix Matrix::rotationYawPitchRoll(float yaw, float pitch, float roll) {
-    Matrix rotated_matrix = Matrix::identity();
+    Matrix rotated_matrix = Matrix::identity(4);
     rotated_matrix *= Matrix::rotation_roll(roll);
     rotated_matrix *= Matrix::rotation_pitch(pitch);
     rotated_matrix *= Matrix::rotation_yaw(yaw);
@@ -317,7 +318,7 @@ Matrix Matrix::rotationYawPitchRoll(const vector3& v) {
 }
 
 Matrix Matrix::translation(const vector3& v) {
-    Matrix result = Matrix::identity();
+    Matrix result = Matrix::identity(4);
 
     result.matrix[3][0] = v.x;
     result.matrix[3][1] = v.y;

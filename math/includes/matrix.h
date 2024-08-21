@@ -52,7 +52,7 @@ public:
     Matrix operator*(float num);
     Matrix operator/(float num);
 
-    static Matrix identity();
+    static Matrix identity(int size);
 
     std::vector<float> operator*(const std::vector<float>& vector);
     [[maybe_unused]] std::vector<float> diagonalVector();

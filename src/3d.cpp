@@ -83,23 +83,29 @@ namespace textoEngine {
 
 
     void renderer::render(std::vector<vector3> &meshes) {
-        auto projectionMatrix = Matrix(2, 3, 0.0f);
+        // rendering requires model matrix, view matrix, projection matrix
+        // and a view port transformation.
 
-        // convert the null projection matrix into a non square identity matrix
+        Matrix model = Matrix::identity(3);
+
+
+        auto projectionMatrix = Matrix::identity(3);
+
+        // convert the identity matrix into a orthographic prespective
         // to ignore the z coordinate
         //
-        //  0   0   0  becomes  1  0  0
-        //  0   0   0           0  1  0 
+        //  1   0   0  becomes  1   0   0
+        //  0   1   0           0   1   0 
+        //  0   0   1           0   0   0
 
 
         //  multiply given coordinate matrix by projection matrix
         //   1   0   0      x   0   0       x   0   0
         //   0   1   0  *   0   y   0   =   0   y   0
-        //                  0   0   z  
+        //   0   0   0      0   0   z       0   0   0
         
     
-        projectionMatrix(1,1) = 1.0f;
-        projectionMatrix(2,2) = 1.0f;
+        projectionMatrix(3,3) = 1.0f;
 
 
         for (const auto& mesh : meshes) {

@@ -28,19 +28,6 @@ target_include_directories(texto PRIVATE includes/)
 
 include_directories(".")
 
-# EXTERNAL PACKAGES
-
-# argparse
-include(FetchContent)
-
-FetchContent_Declare(
-    argparse
-    GIT_REPOSITORY https://github.com/p-ranav/argparse.git
-)
-FetchContent_MakeAvailable(argparse)
-
-
-
 # add math dir
 add_subdirectory(libtexto-math)
 add_subdirectory(libtexto)
@@ -66,5 +53,5 @@ if(BUILD_TESTING)
 endif()
 
 
-target_link_libraries(texto ${OpenCV_LIBS} libtexto-math libtexto argparse)
+target_link_libraries(texto ${OpenCV_LIBS} libtexto-math libtexto)
 target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Wno-error)

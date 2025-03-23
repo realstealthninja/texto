@@ -3,7 +3,8 @@ add_executable(
     zeromatrix.cpp
 )
 
-target_link_libraries(libtexto-tests PRIVATE  Catch2::Catch2WithMain libtexto-math)
+
 include(Catch)
+target_link_libraries(libtexto-tests PRIVATE Catch2::Catch2WithMain libtexto-math)
 catch_discover_tests(libtexto-tests)
 add_test(NAME libtexto-tests COMMAND libtexto-tests)

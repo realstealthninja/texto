@@ -53,5 +53,5 @@ if(BUILD_TESTING)
 endif()
 
 
-target_link_libraries(texto ${OpenCV_LIBS} libtexto-math libtexto)
+target_link_libraries(texto ${OpenCV_LIBS} libtexto-math libtexto )
 target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Wno-error)

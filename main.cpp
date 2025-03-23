@@ -13,7 +13,6 @@ int main() {
     
     image im = read_image("../examples/euler.jpg");
     struct winsize w{};
-    
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     im.resize(w.ws_col, w.ws_row);
     std::shared_ptr<array2d_string> str = im.to_ascii();

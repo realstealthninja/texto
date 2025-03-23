@@ -144,6 +144,18 @@ public:
         }
         return res;
     }
+
+    /**
+     * @brief checks if the matrix is a square matrix
+     * 
+     * @return true if the matrix is square
+     * @return false if the matrxi is not square
+     */
+    bool is_square() {
+        return C == R;
+    }
+
+
 };
 
 

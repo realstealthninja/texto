@@ -1,6 +1,8 @@
 add_executable(
     libtexto-tests
     zeromatrix.cpp
+    transpose.cpp
+    addition.cpp
 )
 
 

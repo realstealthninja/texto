@@ -20,6 +20,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: ./bash.sh test
+      - run: ./build.sh test
               cd build
               ctest

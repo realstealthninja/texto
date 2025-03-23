@@ -24,7 +24,7 @@ TEST_CASE("Transpose of a zero matrix is still a zero matrix", "[matrix]") {
 }
 
 TEST_CASE(
-    "Transpose of a non square zero",
+    "Transpose of a non square zero matrix",
     "[matrix]"
 ) {
     mat<3, 2> zero_mat = mat<3, 2>::ZERO();

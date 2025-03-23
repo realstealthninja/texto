@@ -2,6 +2,12 @@ if [ ! -d "build" ]; then
     mkdir build
 fi
 
-cd build &&
-cmake .. &&
-cmake --build ./ --target texto -j 8 
+cd build
+
+if [ "$1" = "test" ]; then
+    cmake .. -DBUILD_TESTING=TRUE
+else
+    cmake ..
+fi 
+
+cmake --build ./ -j 8 

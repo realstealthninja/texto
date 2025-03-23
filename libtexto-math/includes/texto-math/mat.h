@@ -65,6 +65,23 @@ public:
         return _mat.at(row).at(col);
     }
 
+    /**
+     * @brief const Zero indexed access to the underlying array
+     * 
+     * @param row the row to be accessed
+     * @param col the col to be accessed
+     * @return T& 
+     */
+    const T& operator[](size_t row, size_t col) const {
+        return _mat.at(row).at(col);
+    }
+
+    /**
+     * @brief zero indexed access to 1x3 matrix for each row
+     * 
+     * @param row 
+     * @return mat<1, C, T> 
+     */
     mat<1, C, T> operator[](size_t row) {
         mat<1, C, T> res = mat<1, C, T>::ZERO();
         for (size_t i = 0; i < C; i++) {

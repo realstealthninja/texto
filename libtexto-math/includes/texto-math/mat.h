@@ -102,6 +102,38 @@ public:
         return _mat.at(row - 1).at(col - 1);
     }
 
+    /**
+     * @brief addition assignment operator
+     * 
+     * @param lhs left hand matrix
+     * @return mat<R, C, T>& the same matrix but with the lhs added to it
+     */
+    mat<R, C, T>& operator+=(const mat<R, C, T>& lhs) {
+        for(size_t i = 0; i < R; i++) {
+            for(size_t j = 0; j < C; j++) {
+                (*this)[i, j] += lhs[i, j];
+            }
+        }
+        return *this;
+    }
+
+    /**
+     * @brief addition operator
+     * 
+     * @param lhs left hand matrix
+     * @param rhs right hand matrix
+     * @return mat<R, C, T> 
+     */
+    friend mat<R, C, T> operator+(mat<R, C, T> lhs, const mat<R, C, T>& rhs) {
+        lhs += rhs;
+        return lhs;
+    }
+
+    /**
+     * @brief transposes the given matrix
+     * converts rows into columns and vice versa
+     * @return mat<C, R, T> 
+     */
     mat<C, R, T> transpose() {
         mat<C, R, T> res = mat<C, R, T>::ZERO();
 

@@ -10,4 +10,4 @@ else
     cmake ..
 fi 
 
-cmake --build ./ -j 8 
+cmake --build ./ -j $(nproc)

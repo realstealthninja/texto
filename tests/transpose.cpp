@@ -42,7 +42,7 @@ TEST_CASE("Fixed transpose on a non square matrix", "[matrix]") {
     //  │  2  7  │   =   │  9  7  5  │
     //  │  1  5  │       └           ┘
     //  └        ┘ 
-    
+
     for (size_t i = 0; i < 3; i++) {
         for (size_t j = 0; j < 3; j++) {
             REQUIRE(mat1[i, j] == mat1_transposed[j, i]);

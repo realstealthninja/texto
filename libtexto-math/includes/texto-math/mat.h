@@ -6,7 +6,7 @@
 #include <cstddef>
 
 /**
- * @brief 
+ * @brief A templated matrix class able to represent a matrix of any order
  * 
  * @tparam R Number of rows
  * @tparam C Number of columns

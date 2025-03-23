@@ -33,6 +33,7 @@ add_subdirectory(libtexto-math)
 add_subdirectory(libtexto)
 
 if(BUILD_TESTING)
+  enable_testing()
     # Catch2
     include(FetchContent)
 

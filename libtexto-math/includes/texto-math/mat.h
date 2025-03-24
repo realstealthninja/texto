@@ -122,7 +122,7 @@ public:
     }
 
     /**
-     * @brief zero indexed access to 1x3 matrix for each row
+     * @brief zero indexed access to \f$1xC\f$ matrix for each row
      * 
      * @param row 
      * @return mat<1, C, T> 

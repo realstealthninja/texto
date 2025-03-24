@@ -211,9 +211,21 @@ public:
     bool is_square() {
         return C == R;
     }
-
-
 };
 
+template <size_t R, size_t C, typename T = float>
+std::ostream& operator<<(std::ostream& os, const mat<R, C, T>& obj) {
+
+    os << std::format("┌{}┐\n", std::string((C*2) + 3 , ' '));
+    for (size_t i = 0; i < R; i++) {
+        std::string row = "";
+        for (size_t j = 0; j < C; j++) {
+            row += std::format("{} ", obj[i, j]);
+        }
+        os << std::format("│  {} │\n", row);
+    }
+    os << std::format("└{}┘\n", std::string((C*2) + 3 , ' '));
+    return os;
+}
 
 #endif // LIBTEXTO_MATH_MAT_H

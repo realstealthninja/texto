@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(texto
     LANGUAGES CXX
-    VERSION 1.0.0
+    VERSION 1.5.0
     DESCRIPTION "A text based renderer"
 )
 

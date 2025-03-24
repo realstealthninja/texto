@@ -4,6 +4,10 @@
 #include <array>
 #include <cassert>
 #include <cstddef>
+#include <format>
+#include <initializer_list>
+#include <ostream>
+#include <stdexcept>
 
 /**
  * @brief A templated matrix class able to represent a matrix of any order
@@ -90,6 +94,10 @@ public:
      * @return T& 
      */
     T& operator[](size_t row, size_t col) {
+        if(row < 0 || col < 0 || row > R || col > C) {
+            throw std::invalid_argument("Specified index out of bounds");
+        }
+        
         return _mat.at(row).at(col);
     }
 
@@ -107,6 +115,9 @@ public:
      * @return T& 
      */
     const T& operator[](size_t row, size_t col) const {
+        if(row < 0 || col < 0 || row > R || col > C) {
+            throw std::invalid_argument("Specified index out of bounds");
+        }
         return _mat.at(row).at(col);
     }
 
@@ -117,6 +128,10 @@ public:
      * @return mat<1, C, T> 
      */
     mat<1, C, T> operator[](size_t row) {
+        if(row < 0 || row > R) {
+            throw std::invalid_argument("Specified index out of bounds");
+        }
+
         mat<1, C, T> res = mat<1, C, T>::ZERO();
         for (size_t i = 0; i < C; i++) {
             res[0, i] = *this[row, i];
@@ -132,7 +147,9 @@ public:
      * @return T& 
      */
     T& operator()(size_t row, size_t col) {
-        assert(row >= 1 && col >= 1);
+        if(row < 1 || col < 1 || row > R || col > C) {
+            throw std::invalid_argument("Specified index out of bounds");
+        }
         return _mat.at(row - 1).at(col - 1);
     }
 

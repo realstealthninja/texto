@@ -6,9 +6,9 @@
 Your one-stop shop for all things related to ascii.
 </p>
 
-<p align="center">
-<img src="./examples/texto.svg" height="300" width="300" alt="texto-logo">
-</p>
+<center>
+<img src="examples/texto.svg" height="300" width="300" alt="texto-logo">
+</center>
 
 <p align="center"> Texto is supposed to be an <a href=https://en.wikipedia.org/wiki/ASCII>ASCII</a> based renderer.</p>
 <div align="center">

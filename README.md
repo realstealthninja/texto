@@ -7,8 +7,10 @@
 <div align="center">
     Your one-stop shop for all things related to ascii.
 </div>
-<div align="center">
-    ![texto-logo](assets/texto.svg)
+<div align="center" markdown="1">
+
+![texto-logo](assets/texto.svg)
+
 </div>
 
 <div align="center"> Texto is supposed to be an <a href=https://en.wikipedia.org/wiki/ASCII>ASCII</a> based renderer.</div>

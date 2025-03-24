@@ -40,7 +40,13 @@ public:
 
     mat(const std::initializer_list<std::initializer_list<T> > arr) {
         if(arr.size() != R || (*arr.begin()).size() != C) {
-            throw std::invalid_argument("Array is not the same size as matrix");
+            throw std::invalid_argument(
+                std::format(
+                    "Array{}x{} is not the same size as matrix{}x{}",
+                    arr.size(), (*arr.begin()).size(),
+                    R,C
+                )
+            );
         }
 
         for(size_t i = 0; i < R; i++) {

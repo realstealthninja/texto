@@ -8,9 +8,18 @@
 /**
  * @brief A templated matrix class able to represent a matrix of any order
  * 
+ * \f[
+ *  A  = \begin{bmatrix} a_{11} & a_{12} & a_{13} & \dots & a_{1n} \\
+ *                       a_{21} & a_{22} & a_{23} & \dots & a_{2n} \\ 
+ *                       a_{31} & a_{32} & a_{33} & \dots & a_{3n} \\
+ *                       \vdots & \vdots & \vdots & \ddots& \vdots \\
+ *                       a_{n1} & a_{n2} & a_{n3} & \dots & a_{nn}
+ *      \end{bmatrix}
+ * \f]
+ * 
  * @tparam R Number of rows
  * @tparam C Number of columns
- * @tparam T 
+ * @tparam T type of the members of the matrix
  */
 template <size_t R, size_t C, typename T = float>
 class mat {
@@ -18,12 +27,19 @@ private:
     std::array<std::array<T, C>, R> _mat{};
 
 public:
+    /**
+     * @brief Constructs a new mat object
+     * 
+     * @param arr an array of the same order as the desired matrix
+     */
     mat(const std::array<std::array<T, C>, R> arr) : _mat(arr) {};
 
     /**
-     * @brief Returns and identity matrix
-     * 
-     * @return mat<R, C, T> 
+     * @brief Returns an identity matrix
+     * \f[
+     *  I_{3\times3} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}_{3\times3}  
+     * \f]
+     * @return mat<R, C, T> an identity matrix of order RxC
      */
     static mat<R, C, T> IDENTITY() {
         std::array<std::array<T, C>, R> _mat{};
@@ -67,6 +83,12 @@ public:
 
     /**
      * @brief const Zero indexed access to the underlying array
+     *
+     *  \f[ A = \begin{bmatrix} 1 & 2 & 3\\a & b & c \end{bmatrix} \f]
+     *  @code{.cpp}
+     *  mat<3,3> A({1, 2, 3}, {a, b, c});
+     *  A[0, 0]; // is 1 
+     *  @endcode
      * 
      * @param row the row to be accessed
      * @param col the col to be accessed
@@ -132,7 +154,13 @@ public:
     /**
      * @brief transposes the given matrix
      * converts rows into columns and vice versa
-     * @return mat<C, R, T> 
+     * 
+     *  \f{eqnarray*}{
+     *      A &=& \begin{bmatrix} 1 & 2 & 3\\a & b & c \end{bmatrix}\\ \\
+     *      A^\intercal &=& \begin{bmatrix} 1 & 2 & 3\\a & b & c \end{bmatrix}^\intercal \\ \\ 
+     *        &=& \begin{bmatrix} 1 & a \\ 2 & b \\ 3 & c \end{bmatrix} 
+     *   \f}
+     * @return mat<C, R, T> The transposed matrix of order CxR
      */
     mat<C, R, T> transpose() {
         mat<C, R, T> res = mat<C, R, T>::ZERO();
@@ -148,8 +176,8 @@ public:
     /**
      * @brief checks if the matrix is a square matrix
      * 
-     * @return true if the matrix is square
-     * @return false if the matrxi is not square
+     * @return `true` if the matrix is square
+     * @return `false` if the matrix is not square
      */
     bool is_square() {
         return C == R;

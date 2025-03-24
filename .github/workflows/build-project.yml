@@ -16,7 +16,7 @@ jobs:
           execute_install_scripts: true
           version: 1.0
       
-      - run: apt-get install libopencv-dev 
+      - run: sudo apt-get install libopencv-dev 
         shell: bash
       
       - name: Build project
@@ -47,7 +47,7 @@ jobs:
           execute_install_scripts: true
           version: 1.0
       
-      - run: apt-get install libopencv-dev 
+      - run: sudo apt-get install libopencv-dev 
         shell: bash
       
       - name: Build project

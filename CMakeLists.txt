@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(texto
+project(Texto
     LANGUAGES CXX
     VERSION 1.5.0
     DESCRIPTION "A text based renderer"

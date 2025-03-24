@@ -12,14 +12,15 @@ jobs:
       - name: Install dependencies
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: libopencv-dev dia doxygen doxygen-latex graphviz
+          packages: dia doxygen doxygen-latex graphviz
           execute_install_scripts: true
           version: 1.0
       
+      - run: apt-get install libopencv-dev 
+        shell: bash
+      
       - name: Build project
-        run:
-          sudo apt install
-          ./build.sh
+        run: ./build.sh
       
       - name: Upload docs as an artifact
         id: deployment
@@ -42,15 +43,16 @@ jobs:
       - name: Install dependencies
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: libopencv-dev dia doxygen doxygen-latex graphviz
+          packages: dia doxygen doxygen-latex graphviz
           execute_install_scripts: true
           version: 1.0
       
+      - run: apt-get install libopencv-dev 
+        shell: bash
+      
       - name: Build project
         run: |
-              sudo apt install
               ./build.sh test
-
       - name: Test project
         run: |
               cd build

@@ -186,6 +186,33 @@ public:
         return lhs;
     }
 
+    template<size_t C2>
+    friend mat<R, C2, T> operator*(mat<R, C, T> lhs, const mat<C, C2, T>& rhs) {
+
+        mat<R, C2, T> _mat = mat<R, C2, T>::ZERO();
+
+        for (size_t i = 0; i < R; i++) {
+            for (size_t j = 0; j < C2; j++) {
+                for (size_t k = 0; k < C; k++) {
+                    _mat[i, j] += lhs[i, k] * rhs[k, j];
+                }
+            }
+        }
+        return _mat;
+    }
+
+    friend bool operator==(const mat<R, C, T> lhs, const mat<R, C, T>& rhs) {
+        for(size_t i = 0; i < R; i++) {
+            for(size_t j = 0; j < C; j++) {
+                if (lhs[i, j] != rhs[i, j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
     /**
      * @brief transposes the given matrix
      * converts rows into columns and vice versa

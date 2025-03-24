@@ -94,10 +94,10 @@ public:
      * @return T& 
      */
     T& operator[](size_t row, size_t col) {
-        if(row < 0 || col < 0 || row > R || col > C) {
+        if(row > R || col > C) {
             throw std::invalid_argument("Specified index out of bounds");
         }
-        
+
         return _mat.at(row).at(col);
     }
 
@@ -115,7 +115,7 @@ public:
      * @return T& 
      */
     const T& operator[](size_t row, size_t col) const {
-        if(row < 0 || col < 0 || row > R || col > C) {
+        if(row > R || col > C) {
             throw std::invalid_argument("Specified index out of bounds");
         }
         return _mat.at(row).at(col);
@@ -128,7 +128,7 @@ public:
      * @return mat<1, C, T> 
      */
     mat<1, C, T> operator[](size_t row) {
-        if(row < 0 || row > R) {
+        if(row > R) {
             throw std::invalid_argument("Specified index out of bounds");
         }
 

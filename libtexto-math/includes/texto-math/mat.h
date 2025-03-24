@@ -34,6 +34,18 @@ public:
      */
     mat(const std::array<std::array<T, C>, R> arr) : _mat(arr) {};
 
+    mat(const std::initializer_list<std::initializer_list<T> > arr) {
+        if(arr.size() != R || (*arr.begin()).size() != C) {
+            throw std::invalid_argument("Array is not the same size as matrix");
+        }
+
+        for(size_t i = 0; i < R; i++) {
+            for (size_t j = 0; j < C; j++) {
+                _mat.at(i).at(j) = *((*arr.begin()).begin() + j);
+            }
+        }
+    }
+
     /**
      * @brief Returns an identity matrix
      * \f[

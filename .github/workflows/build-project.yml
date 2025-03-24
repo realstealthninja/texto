@@ -17,7 +17,9 @@ jobs:
           version: 1.0
       
       - name: Build project
-        run: ./build.sh
+        run:
+          sudo apt install
+          ./build.sh
       
       - name: Upload docs as an artifact
         id: deployment
@@ -46,7 +48,9 @@ jobs:
       
       - name: Build project
         run: |
+              sudo apt install
               ./build.sh test
+
       - name: Test project
         run: |
               cd build

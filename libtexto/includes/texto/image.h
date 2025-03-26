@@ -6,6 +6,12 @@
 #include <vector>
 #include <string>
 
+/**
+ * @brief contains functions and classes related to texto
+ * 
+ */
+namespace texto {
+
 typedef std::vector<std::vector<std::string> >  array2d_string;
 
 /**
@@ -40,5 +46,7 @@ public:
     
 
 };
+
+} // texto
 
 #endif // TEXTO_IMAGE_H

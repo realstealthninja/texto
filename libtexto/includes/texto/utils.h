@@ -10,6 +10,11 @@
 #include <texto/image.h>
 
 /**
+ * @brief contains functions and classes related to texto
+ */
+namespace texto {
+
+/**
  * @brief reads an image into image object
  * 
  * @param path to the image
@@ -21,6 +26,8 @@ inline image read_image(const std::string& path) {
 
     return image(img);
 }
+
+} // texto
 
 
 #endif // TEXTO_UTILS_H

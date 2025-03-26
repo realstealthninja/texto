@@ -5,9 +5,11 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
 #include <texto/image.h>
-#include <texto-math/mat.h>
+#include <texmath/mat.h>
 #include <texto/utils.h>
 #include <sys/ioctl.h>
+
+using namespace texto;
 
 int main() {
     

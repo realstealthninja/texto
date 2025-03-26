@@ -3,6 +3,7 @@ add_executable(
     zeromatrix.cpp
     transpose.cpp
     addition.cpp
+    substraction.cpp
     multiplication.cpp
     access.cpp
 )

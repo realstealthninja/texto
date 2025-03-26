@@ -4,10 +4,11 @@
 #include <opencv2/opencv.hpp>
 #include <texto/image.h>
 
+using namespace texto;
+
 typedef cv::Vec4b Pixel;
 
 const std::string scale = " .'`^\",:;Il!i><~+_-?][}{1)(|/\\tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
-
 
 void image::resize(int width, int height) {
 

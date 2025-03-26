@@ -50,3 +50,14 @@ TEST_CASE("Fixed transpose on a non square matrix", "[matrix]") {
         }
     }
 }
+
+TEST_CASE("Matrix times it's transpose should be symmetric", "[matrix]") {
+    mat<3, 3> A = {
+        {6.0f, 2.0f, 3.0f},
+        {-2.0f, -8.0f, 1.0f},
+        {3.0f, 6.0f, 2.5f}
+    };
+
+    // (AAᵀ)ᵀ == AAᵀ 
+    REQUIRE(A * A.transpose() == (A*A.transpose()).transpose());
+}

@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
-#include <texto-math/mat.h>
+#include <texmath/mat.h>
+using namespace texmath;
 
 TEST_CASE("Multiplication with zero matrix", "[matrix]") {
     auto mat1 = mat<3, 3>::ZERO();

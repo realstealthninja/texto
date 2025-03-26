@@ -1,5 +1,7 @@
 #include "catch2/catch_test_macros.hpp"
-#include <texto-math/mat.h>
+#include <texmath/mat.h>
+
+using namespace texmath;
 
 TEST_CASE("Additon of two matrices", "[matrix]") {
     std::array<std::array<int, 3>, 3> mat1_arr(

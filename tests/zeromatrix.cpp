@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN
-#include <texto-math/mat.h>
+#include <texmath/mat.h>
 #include <catch2/catch_test_macros.hpp>
+using namespace texmath;
 
 TEST_CASE("Zero matrix is zero matrix", "[matrix]") {
     auto zero_matrix = mat<3, 3>::ZERO();

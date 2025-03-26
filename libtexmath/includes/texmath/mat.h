@@ -10,6 +10,11 @@
 #include <stdexcept>
 
 /**
+ * @brief contains math functions and classes 
+ */
+namespace texmath {
+
+/**
  * @brief A templated matrix class able to represent a matrix of any order
  * 
  * \f[
@@ -186,6 +191,68 @@ public:
         return lhs;
     }
 
+    /**
+     * @brief substraction assignment operator
+     * 
+     * @param lhs right hand matrix
+     * @return mat<R, C, T>& the resultant matrix
+     */
+    mat<R, C, T>& operator-=(const mat<R, C, T>& lhs) {
+        for(size_t i = 0; i < R; i++) {
+            for(size_t j = 0; j < C; j++) {
+                (*this)[i, j] -= lhs[i, j];
+            }
+        }
+        return *this;
+    }
+
+    /**
+     * @brief substraction operator
+     * 
+     * @param lhs left hand matrix
+     * @param rhs right hand matrix
+     * @return mat<R, C, T> the resultant matrix
+     */
+    friend mat<R, C, T> operator-(mat<R, C, T> lhs, const mat<R, C, T>& rhs) {
+        lhs -= rhs;
+        return lhs;
+    }
+
+    /**
+     * @brief mutliplies and assigns a scalar to a matrix
+     * 
+     * @param scalar the scalar to be multiplied
+     * @return mat<R, C, T>& the resultant matrix
+     */
+    mat<R, C, T>& operator*=(const T scalar) {
+        for(size_t i = 0; i < R; i++) {
+            for(size_t j = 0; j < C; j++) {
+                (*this)[i, j] *= scalar;
+            }
+        }
+        return *this;
+    }
+
+    /**
+     * @brief multiplies a scalar with a matrix
+     * 
+     * @param lhs left hand matrix
+     * @param scalar scalar quantity
+     * @return mat<R, C, T> the resultant matrix
+     */
+    friend mat<R, C, T> operator*(mat<R, C, T> lhs, const T scalar) {
+        lhs *= scalar;
+        return lhs;
+    }
+
+    /**
+     * @brief multilpies two matrices
+     * 
+     * @tparam C2 no of columns of the second matrix
+     * @param lhs left hand matrix
+     * @param rhs right hand matrix
+     * @return mat<R, C2, T> the multiplied matrix
+     */
     template<size_t C2>
     friend mat<R, C2, T> operator*(mat<R, C, T> lhs, const mat<C, C2, T>& rhs) {
 
@@ -201,6 +268,14 @@ public:
         return _mat;
     }
 
+    /**
+     * @brief compares two matrices
+     * 
+     * @param lhs left hand matrix
+     * @param rhs right hand matrix
+     * @return true if the matrices are equal
+     * @return false if the matrices are not equal
+     */
     friend bool operator==(const mat<R, C, T> lhs, const mat<R, C, T>& rhs) {
         for(size_t i = 0; i < R; i++) {
             for(size_t j = 0; j < C; j++) {
@@ -246,6 +321,16 @@ public:
     }
 };
 
+/**
+ * @brief Insertion operator overload for a matrix
+ * 
+ * @tparam R no of rows of the matrix
+ * @tparam C no of columns of the matrix
+ * @tparam T type of the elements of the matrix
+ * @param os outstream
+ * @param obj the matrix object
+ * @return std::ostream& the modified outstream
+ */
 template <size_t R, size_t C, typename T = float>
 std::ostream& operator<<(std::ostream& os, const mat<R, C, T>& obj) {
 
@@ -260,5 +345,7 @@ std::ostream& operator<<(std::ostream& os, const mat<R, C, T>& obj) {
     os << std::format("└{}┘\n", std::string((C*2) + 3 , ' '));
     return os;
 }
+
+} // texmath
 
 #endif // LIBTEXTO_MATH_MAT_H

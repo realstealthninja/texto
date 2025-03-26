@@ -31,7 +31,7 @@ target_include_directories(texto PRIVATE includes/)
 include_directories(".")
 
 # add math dir
-add_subdirectory(libtexto-math)
+add_subdirectory(libtexmath)
 add_subdirectory(libtexto)
 
 if(BUILD_TESTING)
@@ -82,11 +82,11 @@ if(BUILD_DOC)
           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
           COMMENT "Generating API documentation with Doxygen"
           VERBATIM )
-  else (DOXYGEN_FOUND)
+  else()
     message("Doxygen need to be installed to generate the doxygen documentation")
   endif (DOXYGEN_FOUND)
 endif()
 
 
-target_link_libraries(texto ${OpenCV_LIBS} libtexto-math libtexto )
+target_link_libraries(texto ${OpenCV_LIBS} libtexmath libtexto )
 target_compile_options(texto PRIVATE -Wall -Wextra -Wpedantic -Wno-error)

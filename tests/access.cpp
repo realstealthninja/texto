@@ -16,7 +16,7 @@ TEST_CASE("Invalid access into matrix via () operator", "[matrix]") {
 }
 
 TEST_CASE("Invalid access into matrix via [] operator", "[matrix]") {
-    REQUIRE_THROWS_AS(matrix(4, 4), std::invalid_argument);
-    REQUIRE_THROWS_AS(matrix(4, 3), std::invalid_argument);
-    REQUIRE_THROWS_AS(matrix(3, 4), std::invalid_argument);
+    REQUIRE_THROWS_AS((matrix[4, 4]), std::invalid_argument);
+    REQUIRE_THROWS_AS((matrix[4, 3]), std::invalid_argument);
+    REQUIRE_THROWS_AS((matrix[3, 4]), std::invalid_argument);
 }

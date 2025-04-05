@@ -56,7 +56,7 @@ public:
 
         for(size_t i = 0; i < R; i++) {
             for (size_t j = 0; j < C; j++) {
-                _mat.at(i).at(j) = *((*arr.begin()).begin() + j);
+                _mat.at(i).at(j) = *((*(arr.begin() + i)).begin() + j);
             }
         }
     }

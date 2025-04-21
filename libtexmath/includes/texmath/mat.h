@@ -244,6 +244,34 @@ public:
         lhs *= scalar;
         return lhs;
     }
+    
+    /**
+     * @brief divides and assigns a scalar to a matrix
+     * 
+     * @param scalar the scalar to be divded
+     * @return mat<R, C, T>& the resultant matrix
+     */
+    mat<R, C, T>& operator/=(const T scalar) {
+
+        for(size_t i = 0; i < R; i++) {
+            for(size_t j = 0; j < C; j++) {
+                (*this)[i, j] /= scalar;
+            }
+        }
+        return *this;
+    }
+
+    /**
+     * @brief divdes a scalar with a matrix
+     * 
+     * @param lhs left hand matrix
+     * @param scalar scalar quantity
+     * @return mat<R, C, T> the resultant matrix
+     */
+    friend mat<R, C, T> operator/(mat<R, C, T> lhs, const T scalar) {
+        lhs /= scalar;
+        return lhs;
+    }
 
     /**
      * @brief multilpies two matrices

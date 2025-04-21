@@ -50,6 +50,15 @@ public:
         return lhs;
     }
 
+    T dot(const vec2<T>& lhs) {
+        return this->x * lhs.x + this->y * lhs.y;
+    }
+
+    static T dot(const vec2<T>& lhs, const vec2<T>& rhs) {
+        return lhs.dot(rhs);
+    }
+
+
 };
 
 template<typename  T = float>

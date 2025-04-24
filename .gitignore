@@ -7,8 +7,9 @@ build/
 # IDE
 /.vscode/
 /.idea/
+*.vim
 
-# explicit examples
+# examples
 /examples/givingup.mp4
 
 
